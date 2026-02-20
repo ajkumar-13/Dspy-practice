@@ -1,0 +1,48 @@
+[project]
+name = "learn-dspy"
+version = "0.1.0"
+description = "DSPy Mastery: Zero to Pro — A comprehensive blog series covering DSPy from foundations to production"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dspy>=2.6",
+    "openai>=1.0",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+rag = [
+    "chromadb>=0.4",
+    "faiss-cpu>=1.7",
+]
+finetuning = [
+    "transformers>=4.40",
+    "datasets>=2.0",
+]
+production = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "mlflow>=2.0",
+]
+dev = [
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+    "ruff>=0.4",
+    "pytest>=8.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"blogs/**/code/*.py" = ["F841", "E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

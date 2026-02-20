@@ -287,14 +287,15 @@ This is less a code pattern and more a **development philosophy**: define metric
 
 ### The EDD Workflow
 
-```
-1. Define evaluation metric  ->  "What does success look like?"
-2. Build evaluation dataset  ->  "What are 50-100 representative examples?"
-3. Build baseline program    ->  "Simplest thing that could work"
-4. Evaluate baseline         ->  "Where do we stand?"
-5. Optimize                  ->  "Can the optimizer do better?"
-6. Iterate on program design ->  "Do I need more stages, better tools?"
-7. Re-evaluate               ->  "Did the change help?"
+```mermaid
+flowchart TD
+    A["1. Define metric 'What does success look like?'"] --> B["2. Build eval dataset '50-100 representative examples'"]
+    B --> C["3. Build baseline 'Simplest thing that could work'"]
+    C --> D["4. Evaluate baseline 'Where do we stand?'"]
+    D --> E["5. Optimize 'Can the optimizer do better?'"]
+    E --> F["6. Iterate design 'More stages? Better tools?'"]
+    F --> G["7. Re-evaluate 'Did the change help?'"]
+    G -->|"repeat"| D
 ```
 
 ```python
@@ -350,28 +351,21 @@ PAPILLON (Privacy-Aware delegation of LLM Inference to Optimize Nimble networks)
 
 ### The Architecture
 
-```
-┌──────────────────────────────────────┐
-│  User Request (contains PII/secrets) │
-└──────────────┬───────────────────────┘
-               │
-       ┌───────v──────────┐
-       │  Small Local LM  │  ← Runs on your infrastructure
-       │  (privacy-aware) │
-       └───────┬──────────┘
-               │  Sanitized/abstracted request
-       ┌───────v─────────┐
-       │  Powerful Cloud │  ← External API (GPT-4o, etc.)
-       │     LM          │
-       └───────┬─────────┘
-               │  High-quality response
-       ┌───────v─────────┐
-       │  Small Local LM │  ← Re-contextualizes with private data
-       └───────┬─────────┘
-               │
-       ┌───────v────────┐
-       │  Final Answer  │
-       └────────────────┘
+```mermaid
+flowchart TD
+    U["User Request(contains PII/secrets)"] --> L1
+    subgraph Local1["Your Infrastructure"]
+        L1["Small Local LM (sanitize & redact)"]
+    end
+    L1 -->|"sanitized request"| C1
+    subgraph Cloud["External API"]
+        C1["Powerful Cloud LM(GPT-4o, Claude)"]
+    end
+    C1 -->|"high-quality response"| L2
+    subgraph Local2["Your Infrastructure"]
+        L2["Small Local LM(recontextualize)"]
+    end
+    L2 --> FA[Final Answer]
 ```
 
 ```python

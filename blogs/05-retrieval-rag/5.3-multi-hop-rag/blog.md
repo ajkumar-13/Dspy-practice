@@ -114,6 +114,18 @@ print(f"Response: {result.response}")
 
 ### How It Works
 
+```mermaid
+flowchart TD
+    Q[Question] --> Loop
+    subgraph Loop["Hop Loop (repeat max_hops)"]
+        GQ["Generate Query(CoT per hop)"] --> Ret[Retrieve passages]
+        Ret --> Dedup["Deduplicate & accumulate context"]
+        Dedup -->|"more hops?"| GQ
+    end
+    Loop --> Resp["Respond(ChainOfThought)"]
+    Resp --> A[Response]
+```
+
 1.  **Hop 1:** The model sees an empty context and the original question. It generates a search query (e.g., "Where is the Eiffel Tower located?") and retrieves passages about Paris.
 2.  **Hop 2:** The model now has context about Paris. It generates a follow-up query (e.g., "What river flows through Paris?") and retrieves passages about the Seine.
 3.  **Final response:** With context from both hops, the model answers: "The Seine river flows through Paris, where the Eiffel Tower is located."

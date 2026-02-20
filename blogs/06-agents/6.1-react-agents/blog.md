@@ -38,6 +38,15 @@ ReAct is a loop. At each iteration, the model produces three things:
 
 The framework executes the tool and feeds the result back as an **Observation**. The model then reasons again with the new information. This loop continues until the model calls `finish` or hits the maximum number of iterations.
 
+```mermaid
+flowchart TD
+    T[Thought] --> TS{Tool Selection}
+    TS -->|"tool != finish"| TE["Execute Tool(with args)"]
+    TE --> O[Observation]
+    O --> T
+    TS -->|"tool = finish"| A[Return Answer]
+```
+
 ```
 Thought: I need to find the current weather in Paris.
 Tool: get_weather

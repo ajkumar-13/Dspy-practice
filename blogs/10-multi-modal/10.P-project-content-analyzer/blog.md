@@ -33,18 +33,14 @@ This project simulates a real-world use case you'd find at a social media compan
 
 The system follows a four-stage pipeline:
 
-```
-Input (Image + Text)
-    │
-    ├──> ImageAnalyzer ──> visual analysis (objects, scene, style, colors)
-    │
-    ├──> TextAnalyzer ──> text analysis (themes, entities, intent)
-    │
-    └──> ContentSynthesizer <── (receives both analyses)
-              │
-              └──> SentimentAnalyzer ──> final sentiment/tone
-                        │
-                        └──> Structured Content Report
+```mermaid
+flowchart TD
+    Input["Input(Image + Text)"] --> IA["ImageAnalyzer(objects, scene, style, colors)"]
+    Input --> TA["TextAnalyzer(themes, entities, intent)"]
+    IA --> CS[ContentSynthesizer]
+    TA --> CS
+    CS --> SA["SentimentAnalyzer(sentiment, tone, confidence)"]
+    SA --> Report["Structured Content Report"]
 ```
 
 Each component is a `dspy.Module` with its own signature. The pipeline module orchestrates them and returns a comprehensive `dspy.Prediction`.

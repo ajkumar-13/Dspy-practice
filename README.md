@@ -4,6 +4,7 @@
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![DSPy](https://img.shields.io/badge/DSPy-2.6+-green.svg)](https://dspy.ai)
+[![CI](https://github.com/ajkumar-13/Dspy-practice/actions/workflows/ci.yml/badge.svg)](https://github.com/ajkumar-13/Dspy-practice/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![uv](https://img.shields.io/badge/uv-package%20manager-blueviolet.svg)](https://docs.astral.sh/uv/)
 
@@ -172,12 +173,22 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 
 ```
 learn-dspy/
+├── .github/workflows/ci.yml           # CI: lint + test on every push
 ├── README.md                          # This file
 ├── plan.md                            # Full learning plan
 ├── pyproject.toml                     # UV project config + dependencies
 ├── .python-version                    # Python 3.12
 ├── .env.example                       # API key template
 ├── .gitignore
+│
+├── tests/                             # Pytest test suite
+│   ├── conftest.py                    # Shared fixtures
+│   ├── test_signatures.py             # Signature field validation
+│   ├── test_typed_predictors.py       # Pydantic model constraints
+│   ├── test_examples.py              # dspy.Example & Prediction
+│   ├── test_metrics.py               # Custom metric logic
+│   ├── test_modules.py               # Module instantiation
+│   └── test_tools.py                 # Agent tool functions
 │
 └── blogs/
     ├── 01-foundations/
@@ -278,6 +289,23 @@ uv sync --extra rag          # Phase 5: ChromaDB, FAISS
 uv sync --extra finetuning   # Phase 7: Transformers, Datasets
 uv sync --extra production   # Phase 11: FastAPI, MLflow
 uv sync --extra dev          # Development tools: Jupyter, Ruff, Pytest
+```
+
+### Running Tests
+
+```bash
+# Run all tests (no LLM API key required)
+uv run python -m pytest tests/ -v
+```
+
+Tests validate signatures, Pydantic models, metrics, tool functions, and module structure without calling any LLM.
+
+### Linting
+
+```bash
+# Check code style
+uv run ruff check .
+uv run ruff format --check .
 ```
 
 ### Using a Local Model (Free)

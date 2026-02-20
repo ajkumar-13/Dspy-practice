@@ -193,24 +193,12 @@ For a rough estimate before running: if you're using `gpt-4o-mini` at ~\$0.15 pe
 
 Evaluation isn't a one-time event. It's a continuous loop that drives improvement:
 
-```
-┌─────────────┐
-│ 1. Evaluate │ ← Run dspy.Evaluate with your metric
-└──────┬──────┘
-       │
-┌──────v──────────┐
-│ 2. Diagnose     │ ← Inspect failures, find patterns
-└──────┬──────────┘
-       │
-┌──────v──────────┐
-│ 3. Improve      │ ← Change signature, module, or metric
-└──────┬──────────┘
-       │
-┌──────v──────────┐
-│ 4. Re-evaluate  │ ← Confirm improvement, repeat
-└──────┬──────────┘
-       │
-       └──→ back to step 1
+```mermaid
+flowchart TD
+    A["1. Evaluate(dspy.Evaluate + metric)"] --> B["2. Diagnose(inspect failures, find patterns)"]
+    B --> C["3. Improve(change signature, module, or metric)"]
+    C --> D["4. Re-evaluate(confirm improvement)"]
+    D --> A
 ```
 
 Here's the workflow in practice:

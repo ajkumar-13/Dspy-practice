@@ -79,6 +79,13 @@ You absolutely *can* use modules without wrapping them in a class. But wrapping 
 
 The most common composition pattern is **layering**: one module's output feeds into the next module's input. Think of it as a pipeline where each step refines, enriches, or transforms the data.
 
+```mermaid
+flowchart LR
+    A[Input] --> B["Module A(transform)"]
+    B -->|intermediate result| C["Module B(refine)"]
+    C --> D[Output]
+```
+
 ### Generate, Then Verify
 
 ```python

@@ -36,6 +36,13 @@ Every RAG pipeline follows the same three-step flow:
 2. **Read**: reason over the retrieved context
 3. **Respond**: generate an answer grounded in the evidence
 
+```mermaid
+flowchart LR
+    Q[Question] --> R["Retrieve(search fn)"]
+    R -->|"list[str] passages"| CoT["Read & Reason(ChainOfThought)"]
+    CoT --> Resp[Response]
+```
+
 In DSPy, this becomes a compact module:
 
 ```python

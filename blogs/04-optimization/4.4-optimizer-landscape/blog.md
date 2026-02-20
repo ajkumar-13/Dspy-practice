@@ -121,12 +121,13 @@ Here's how to choose the right optimizer based on your situation:
 
 ### By Data Size
 
-```
-< 10 examples   →  LabeledFewShot (just use what you have)
-10-50 examples  →  BootstrapFewShot or BootstrapFewShotWithRandomSearch
-50-200 examples →  MIPROv2 (auto="medium") or GEPA
-200+ examples   →  MIPROv2 (auto="heavy"), SIMBA, or BootstrapFinetune
-1000+ examples  →  SIMBA (mini-batch scaling) or BootstrapFinetune
+```mermaid
+flowchart TD
+    Start{"How many labeled examples?"} -->|"< 10"| A[LabeledFewShot]
+    Start -->|"10-50"| B["BootstrapFewShot or BootstrapRS"]
+    Start -->|"50-200"| C["MIPROv2 (medium) or GEPA"]
+    Start -->|"200+"| D["MIPROv2 (heavy) SIMBA BootstrapFinetune"]
+    Start -->|"1000+"| E["SIMBA BootstrapFinetune"]
 ```
 
 ### By Goal
