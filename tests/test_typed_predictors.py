@@ -84,7 +84,7 @@ class TestExtractedEntity:
 
     def test_reject_invalid_entity_type(self):
         with pytest.raises(ValidationError):
-            ExtractedEntity(name="X", entity_type="event", confidence=0.5)
+            ExtractedEntity(name="X", entity_type="event", confidence=0.5)  # type: ignore[arg-type]
 
     def test_serialization_roundtrip(self):
         entity = ExtractedEntity(

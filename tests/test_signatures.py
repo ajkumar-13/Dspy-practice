@@ -57,6 +57,7 @@ class TestSentimentAnalysisSignature:
         assert len(SentimentAnalysis.output_fields) == 3
 
     def test_docstring(self):
+        assert SentimentAnalysis.__doc__ is not None
         assert "sentiment" in SentimentAnalysis.__doc__.lower()
 
     def test_can_instantiate_predict(self):
@@ -83,6 +84,7 @@ class TestTranslationSignature:
         assert len(Translation.output_fields) == 2
 
     def test_docstring(self):
+        assert Translation.__doc__ is not None
         assert "translate" in Translation.__doc__.lower()
 
     def test_can_instantiate_predict(self):

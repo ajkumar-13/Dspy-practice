@@ -21,8 +21,8 @@ corpus = [
     "The capital of O.N.A.N. in Infinite Jest is Boston.",
 ]
 
-search = dspy.retrievers.Embeddings(
-    embedder=dspy.Embedder("openai/text-embedding-3-small", dimensions=512),
+search = dspy.retrievers.Embeddings(  # type: ignore[attr-defined]
+    embedder=dspy.Embedder("openai/text-embedding-3-small", dimensions=512),  # type: ignore[arg-type]
     corpus=corpus,
     k=2,
 )
