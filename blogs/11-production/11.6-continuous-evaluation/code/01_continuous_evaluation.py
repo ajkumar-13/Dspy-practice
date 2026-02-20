@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 import dspy
-from dspy.evaluate import Evaluate
+from dspy.evaluate import Evaluate, SemanticF1
 
 # ---------------------------------------------------------------------------
 # Evaluation fixtures (use via conftest.py in practice)
@@ -101,11 +101,12 @@ def run_eval(sample_size=50):
     qa = dspy.ChainOfThought("question -> answer")
 
     def metric(ex, pred, trace=None):
-        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+        return SemanticF1()(ex, pred, trace)
 
     evaluator = Evaluate(devset=sample, metric=metric, num_threads=4, display_progress=True)
 
-    score = evaluator(qa)
+    result = evaluator(qa)
+    score = result.score
 
     # Check for empty answers
     empty_count = 0

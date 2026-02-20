@@ -10,6 +10,7 @@ import random
 from collections import Counter
 
 import dspy
+from dspy.evaluate import SemanticF1
 from pydantic import BaseModel, Field, ValidationError
 
 # ---------------------------------------------------------------------------
@@ -236,7 +237,7 @@ def run_pipeline():
     qa = dspy.ChainOfThought("question -> answer")
 
     def metric(example, prediction, trace=None):
-        return dspy.evaluate.SemanticF1()(example, prediction, trace)
+        return SemanticF1()(example, prediction, trace)
 
     from dspy.evaluate import Evaluate
 

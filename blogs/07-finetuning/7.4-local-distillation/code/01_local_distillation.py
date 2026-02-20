@@ -8,7 +8,7 @@ to a local model running via Ollama.
 import time
 
 import dspy
-from dspy.evaluate import Evaluate
+from dspy.evaluate import Evaluate, SemanticF1
 
 # ---------------------------------------------------------------------------
 # Step 1: Define the task and training data
@@ -68,7 +68,7 @@ def optimize_teacher():
     qa_program = dspy.ChainOfThought(TechnicalQA)
 
     def metric(ex, pred, trace=None):
-        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+        return SemanticF1()(ex, pred, trace)
 
     optimizer = dspy.MIPROv2(metric=metric, auto="light")
     optimized = optimizer.compile(qa_program, trainset=trainset)
@@ -92,7 +92,7 @@ def distill_to_local(optimized_teacher):
     dspy.configure(lm=student_lm)
 
     def metric(ex, pred, trace=None):
-        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+        return SemanticF1()(ex, pred, trace)
 
     distiller = dspy.BootstrapFinetune(metric=metric)
     distilled = distiller.compile(optimized_teacher, trainset=trainset)
@@ -113,7 +113,7 @@ def compare(optimized_teacher, distilled):
     )
 
     def metric(ex, pred, trace=None):
-        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+        return SemanticF1()(ex, pred, trace)
 
     evaluator = Evaluate(devset=devset, metric=metric, num_threads=4)
 

@@ -9,6 +9,7 @@ import arbor
 import dspy
 from arbor import ArborProvider
 from dotenv import load_dotenv
+from dspy.evaluate import SemanticF1
 from dspy.teleprompt import ArborGRPO
 from peft import LoraConfig
 
@@ -42,7 +43,7 @@ class PAPILLON(dspy.Module):
 
 def evaluate_answer_quality(response, gold_answer):
     """Evaluate answer quality using semantic similarity."""
-    scorer = dspy.evaluate.SemanticF1()
+    scorer = SemanticF1()
     ex = dspy.Example(answer=gold_answer).with_inputs("answer")
     pred = dspy.Prediction(answer=response)
     return scorer(ex, pred)

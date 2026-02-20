@@ -7,6 +7,7 @@ Requires: OpenAI API key with gpt-4o-mini and gpt-4o-mini-audio-preview access
 import dspy
 import numpy as np
 from dotenv import load_dotenv
+from dspy.evaluate import answer_exact_match
 
 load_dotenv()
 
@@ -225,7 +226,7 @@ def optimize_image_qa(trainset, devset):
             desc="concise answer to the question"
         )
 
-    metric = dspy.evaluate.answer_exact_match
+    metric = answer_exact_match
     evaluate = dspy.Evaluate(
         devset=devset, metric=metric,
         num_threads=4, display_progress=True,
