@@ -12,6 +12,7 @@ import dspy
 # Option 1: Langfuse Integration
 # ---------------------------------------------------------------------------
 
+
 def langfuse_example():
     """Demonstrate Langfuse tracing for DSPy."""
     import os
@@ -69,6 +70,7 @@ def langfuse_example():
 # Option 2: Arize Phoenix Integration
 # ---------------------------------------------------------------------------
 
+
 def phoenix_example():
     """Demonstrate Arize Phoenix local tracing for DSPy."""
     import phoenix as px
@@ -112,6 +114,7 @@ def phoenix_example():
 # ---------------------------------------------------------------------------
 # Option 3: Generic OpenTelemetry Middleware
 # ---------------------------------------------------------------------------
+
 
 class InstrumentedModule:
     """Wrapper that adds OpenTelemetry tracing to any DSPy module."""

@@ -120,15 +120,15 @@ def run_eval(sample_size=50):
     baseline_score = baseline.get("semantic_f1", 0)
     regression = baseline_score - score
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print("Evaluation Results")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
     print(f"SemanticF1:        {score:.1f}%")
     print(f"Baseline:          {baseline_score:.1f}%")
     print(f"Regression:        {regression:+.1f}%")
     print(f"Empty answer rate: {empty_rate:.0f}%")
     print(f"Sample size:       {len(sample)}")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
 
     if regression > 5:
         print("FAIL: Quality regression exceeds 5% threshold")

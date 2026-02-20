@@ -18,17 +18,14 @@ large_lm = dspy.LM("openai/gpt-4o")
 small_lm = dspy.LM("openai/gpt-4o-mini")
 dspy.configure(lm=large_lm)
 
+
 # Step 2: Define a multi-step pipeline with mixed model sizes
 class AnalysisPipeline(dspy.Module):
     def __init__(self):
         # Complex reasoning stays on the large model
-        self.analyze = dspy.ChainOfThought(
-            "document -> analysis: str, key_findings: list[str]"
-        )
+        self.analyze = dspy.ChainOfThought("document -> analysis: str, key_findings: list[str]")
         # Classification moves to the small model
-        self.classify = dspy.Predict(
-            "analysis, key_findings -> category: str, risk_level: str"
-        )
+        self.classify = dspy.Predict("analysis, key_findings -> category: str, risk_level: str")
 
     def forward(self, document):
         result = self.analyze(document=document)
@@ -36,6 +33,7 @@ class AnalysisPipeline(dspy.Module):
             analysis=result.analysis,
             key_findings=result.key_findings,
         )
+
 
 # Step 3: Prepare training data
 trainset = [
@@ -62,11 +60,13 @@ trainset = [
     # Include 100+ examples for best results
 ]
 
+
 # Step 4: Define a metric
 def pipeline_metric(example, prediction, trace=None):
     category_match = prediction.category.strip().lower() == example.category.strip().lower()
     risk_match = prediction.risk_level.strip().lower() == example.risk_level.strip().lower()
     return category_match and risk_match
+
 
 # Step 5: Create the pipeline and assign the small LM to the classify module
 pipeline = AnalysisPipeline()

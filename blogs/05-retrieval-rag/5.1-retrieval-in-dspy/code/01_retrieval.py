@@ -76,6 +76,7 @@ for i, r in enumerate(results, 1):
 # ==============================================================================
 print("\n=== Example 3: Custom Retriever Function ===\n")
 
+
 def my_custom_search(query: str, k: int = 5) -> list[str]:
     """
     A custom retriever function.
@@ -89,11 +90,11 @@ def my_custom_search(query: str, k: int = 5) -> list[str]:
     ]
     # Simple keyword matching (demo only)
     scored = [
-        (doc, sum(1 for w in query.lower().split() if w in doc.lower()))
-        for doc in custom_corpus
+        (doc, sum(1 for w in query.lower().split() if w in doc.lower())) for doc in custom_corpus
     ]
     scored.sort(key=lambda x: x[1], reverse=True)
     return [doc for doc, score in scored[:k]]
+
 
 # Use it directly
 query = "Who created Python?"

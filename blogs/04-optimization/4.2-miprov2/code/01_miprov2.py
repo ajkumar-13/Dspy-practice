@@ -14,11 +14,21 @@ dspy.configure(lm=lm)
 
 # Training data
 trainset = [
-    dspy.Example(question="What is the largest ocean?", answer="Pacific Ocean").with_inputs("question"),
-    dspy.Example(question="Who discovered penicillin?", answer="Alexander Fleming").with_inputs("question"),
-    dspy.Example(question="What is the hardest natural substance?", answer="Diamond").with_inputs("question"),
-    dspy.Example(question="How many bones in the human body?", answer="206").with_inputs("question"),
-    dspy.Example(question="What planet is known as the Red Planet?", answer="Mars").with_inputs("question"),
+    dspy.Example(question="What is the largest ocean?", answer="Pacific Ocean").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="Who discovered penicillin?", answer="Alexander Fleming").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="What is the hardest natural substance?", answer="Diamond").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="How many bones in the human body?", answer="206").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="What planet is known as the Red Planet?", answer="Mars").with_inputs(
+        "question"
+    ),
     # ... ideally 50+ examples for MIPROv2 to shine
 ]
 

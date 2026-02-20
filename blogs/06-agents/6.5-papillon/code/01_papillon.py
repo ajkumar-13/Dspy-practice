@@ -55,10 +55,9 @@ print("=" * 60 + "\n")
 
 class SensitivityClassifier(dspy.Signature):
     """Classify whether a text contains sensitive personal information."""
+
     text: str = dspy.InputField()
-    contains_pii: bool = dspy.OutputField(
-        desc="True if text contains PII/PHI/sensitive data"
-    )
+    contains_pii: bool = dspy.OutputField(desc="True if text contains PII/PHI/sensitive data")
     sensitivity_reason: str = dspy.OutputField(
         desc="Brief explanation of what sensitive data was found"
     )
@@ -66,6 +65,7 @@ class SensitivityClassifier(dspy.Signature):
 
 class PrivateExtractor(dspy.Signature):
     """Extract key facts from a document, removing all personally identifiable information."""
+
     document: str = dspy.InputField()
     deidentified_facts: str = dspy.OutputField(
         desc="Key facts with all PII removed or replaced with placeholders"
@@ -74,6 +74,7 @@ class PrivateExtractor(dspy.Signature):
 
 class PublicSummarizer(dspy.Signature):
     """Write a clear, professional summary from the provided facts."""
+
     facts: str = dspy.InputField()
     task_description: str = dspy.InputField()
     summary: str = dspy.OutputField()

@@ -27,8 +27,10 @@ load_dotenv()
 # Step 1: Structured Output Models
 # =====================================================
 
+
 class Argument(BaseModel):
     """A single argument or claim found in the document."""
+
     claim: str = Field(description="The core claim being made")
     evidence: str = Field(description="Evidence or reasoning supporting the claim")
     strength: str = Field(description="How strong: strong, moderate, or weak")
@@ -36,6 +38,7 @@ class Argument(BaseModel):
 
 class Theme(BaseModel):
     """A major theme identified in the document."""
+
     name: str = Field(description="Short name for the theme")
     description: str = Field(description="What this theme covers")
     relevance: str = Field(description="Why this theme matters")
@@ -43,6 +46,7 @@ class Theme(BaseModel):
 
 class ChunkAnalysis(BaseModel):
     """Analysis of a single document chunk."""
+
     themes: list[Theme] = Field(description="Major themes in this chunk")
     arguments: list[Argument] = Field(description="Key arguments made")
     counterarguments: list[Argument] = Field(description="Counterarguments or opposing views")
@@ -52,6 +56,7 @@ class ChunkAnalysis(BaseModel):
 
 class DocumentSynthesis(BaseModel):
     """Synthesized analysis across all chunks of a document."""
+
     main_themes: list[Theme] = Field(description="Overarching themes")
     strongest_arguments: list[Argument] = Field(description="Most compelling arguments")
     key_tensions: list[str] = Field(description="Tensions or contradictions")
@@ -63,8 +68,10 @@ class DocumentSynthesis(BaseModel):
 # Step 2: DSPy Signatures and Modules
 # =====================================================
 
+
 class AnalyzeChunk(dspy.Signature):
     """Analyze a document chunk, extracting themes, arguments, and counterarguments."""
+
     chunk: str = dspy.InputField(desc="A section of the document to analyze")
     document_title: str = dspy.InputField(desc="Title of the source document")
     analysis: ChunkAnalysis = dspy.OutputField(desc="Structured analysis of this chunk")
@@ -72,6 +79,7 @@ class AnalyzeChunk(dspy.Signature):
 
 class SynthesizeAnalyses(dspy.Signature):
     """Synthesize multiple chunk analyses into a unified document analysis."""
+
     chunk_analyses: str = dspy.InputField(desc="JSON array of chunk analysis results")
     document_title: str = dspy.InputField(desc="Title of the source document")
     synthesis: DocumentSynthesis = dspy.OutputField(desc="Unified analysis")
@@ -90,9 +98,7 @@ class RLMDocumentAnalyzer(dspy.Module):
             result = self.analyze_chunk(chunk=chunk, document_title=document_title)
             chunk_results.append(result.analysis)
 
-        analyses_json = json.dumps(
-            [a.model_dump() for a in chunk_results], indent=2
-        )
+        analyses_json = json.dumps([a.model_dump() for a in chunk_results], indent=2)
         synthesis = self.synthesize(
             chunk_analyses=analyses_json,
             document_title=document_title,
@@ -113,9 +119,7 @@ class CoTDocumentAnalyzer(dspy.Module):
             result = self.analyze_chunk(chunk=chunk, document_title=document_title)
             chunk_results.append(result.analysis)
 
-        analyses_json = json.dumps(
-            [a.model_dump() for a in chunk_results], indent=2
-        )
+        analyses_json = json.dumps([a.model_dump() for a in chunk_results], indent=2)
         synthesis = self.synthesize(
             chunk_analyses=analyses_json,
             document_title=document_title,
@@ -126,6 +130,7 @@ class CoTDocumentAnalyzer(dspy.Module):
 # =====================================================
 # Step 3: Document Chunking
 # =====================================================
+
 
 def chunk_document(text: str, chunk_size: int = 2000, overlap: int = 200) -> list[str]:
     """Split a document into overlapping chunks by character count."""
@@ -237,6 +242,7 @@ print(f"Confidence: {cot_result.confidence}")
 # Step 5: Compare Approaches
 # =====================================================
 
+
 def compare_analyses(rlm_res: DocumentSynthesis, cot_res: DocumentSynthesis):
     """Print a side-by-side comparison of two analysis results."""
     print("\n" + "=" * 70)
@@ -245,9 +251,15 @@ def compare_analyses(rlm_res: DocumentSynthesis, cot_res: DocumentSynthesis):
 
     print(f"\n{'Metric':<35} {'RLM':>15} {'CoT':>15}")
     print("-" * 65)
-    print(f"{'Themes identified':<35} {len(rlm_res.main_themes):>15} {len(cot_res.main_themes):>15}")
-    print(f"{'Arguments found':<35} {len(rlm_res.strongest_arguments):>15} {len(cot_res.strongest_arguments):>15}")
-    print(f"{'Tensions identified':<35} {len(rlm_res.key_tensions):>15} {len(cot_res.key_tensions):>15}")
+    print(
+        f"{'Themes identified':<35} {len(rlm_res.main_themes):>15} {len(cot_res.main_themes):>15}"
+    )
+    print(
+        f"{'Arguments found':<35} {len(rlm_res.strongest_arguments):>15} {len(cot_res.strongest_arguments):>15}"
+    )
+    print(
+        f"{'Tensions identified':<35} {len(rlm_res.key_tensions):>15} {len(cot_res.key_tensions):>15}"
+    )
     print(f"{'Confidence':<35} {rlm_res.confidence:>15} {cot_res.confidence:>15}")
 
     rlm_words = len(rlm_res.overall_assessment.split())
@@ -265,8 +277,10 @@ compare_analyses(rlm_result, cot_result)
 # Step 6: LLM-as-Judge Evaluation
 # =====================================================
 
+
 class AnalysisQualityJudge(dspy.Signature):
     """Judge the quality of a document analysis against the source text."""
+
     document: str = dspy.InputField(desc="The original document")
     analysis_json: str = dspy.InputField(desc="The analysis result as JSON")
     completeness: float = dspy.OutputField(desc="Score 0-1: covers all major points?")

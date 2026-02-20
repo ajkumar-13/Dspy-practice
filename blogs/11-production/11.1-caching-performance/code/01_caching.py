@@ -20,6 +20,7 @@ load_dotenv()
 # Section 1: Cache Demo (Zero Configuration)
 # =====================================================
 
+
 def demo_automatic_caching():
     """Demonstrate DSPy's automatic 3-layer caching."""
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"), track_usage=True)
@@ -48,6 +49,7 @@ def demo_automatic_caching():
 # =====================================================
 # Section 2: Configuring Cache
 # =====================================================
+
 
 def demo_cache_configuration():
     """Show different cache configurations for various environments."""
@@ -87,6 +89,7 @@ def demo_cache_configuration():
 # =====================================================
 # Section 3: Custom Cache Implementation
 # =====================================================
+
 
 class ContentOnlyCache(Cache):
     """Cache that keys on message content only, ignoring model name.
@@ -128,6 +131,7 @@ def demo_custom_cache():
 # Section 4: Save/Load Programs
 # =====================================================
 
+
 def demo_save_load():
     """Demonstrate saving and loading optimized programs."""
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))
@@ -152,6 +156,7 @@ def demo_save_load():
 # =====================================================
 # Section 5: Performance Patterns
 # =====================================================
+
 
 def demo_usage_tracking():
     """Track token usage for cost monitoring."""

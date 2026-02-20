@@ -15,12 +15,10 @@ dspy.configure(lm=lm)
 # Training data (math/reasoning examples where GEPA excels)
 trainset = [
     dspy.Example(
-        question="If a shirt costs $25 and is 20% off, what do you pay?",
-        answer="$20"
+        question="If a shirt costs $25 and is 20% off, what do you pay?", answer="$20"
     ).with_inputs("question"),
     dspy.Example(
-        question="A train travels 120 miles in 2 hours. What is its speed in mph?",
-        answer="60 mph"
+        question="A train travels 120 miles in 2 hours. What is its speed in mph?", answer="60 mph"
     ).with_inputs("question"),
     # ... more examples, ideally 50+
 ]

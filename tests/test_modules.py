@@ -60,6 +60,7 @@ class TestBuiltinModules:
     def test_predict_with_class_signature(self):
         class QA(dspy.Signature):
             """Answer the question."""
+
             question: str = dspy.InputField()
             answer: str = dspy.OutputField()
 

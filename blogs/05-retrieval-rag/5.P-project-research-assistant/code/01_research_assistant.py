@@ -15,11 +15,13 @@ dspy.configure(lm=lm)
 # 1. Retrieval Backend (ColBERTv2)
 colbert = dspy.ColBERTv2(url="http://20.102.90.50:2017/wiki17_abstracts")
 
+
 # 2. Tools
 def search_wikipedia(query: str) -> list[str]:
     """Search for relevant Wikipedia passages."""
     results = colbert(query, k=5)
     return [r.long_text for r in results]
+
 
 def lookup_details(passage_snippet: str, keyword: str) -> str:
     """Find specific sentences containing a keyword within a passage."""
@@ -27,6 +29,7 @@ def lookup_details(passage_snippet: str, keyword: str) -> str:
     if keyword.lower() in passage_snippet.lower():
         return f"Found details about '{keyword}' in: {passage_snippet[:100]}..."
     return "Keyword not found in snippet."
+
 
 # 3. Agent
 agent = dspy.ReAct("question -> answer", tools=[search_wikipedia, lookup_details])

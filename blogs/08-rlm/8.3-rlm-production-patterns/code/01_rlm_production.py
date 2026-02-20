@@ -26,12 +26,14 @@ def fixed_size_chunks(text, chunk_size=3000, overlap=200):
     start = 0
     while start < len(words):
         end = min(start + chunk_size, len(words))
-        chunks.append({
-            "text": " ".join(words[start:end]),
-            "start_idx": start,
-            "end_idx": end,
-            "chunk_id": len(chunks),
-        })
+        chunks.append(
+            {
+                "text": " ".join(words[start:end]),
+                "start_idx": start,
+                "end_idx": end,
+                "chunk_id": len(chunks),
+            }
+        )
         start = end - overlap
     return chunks
 
@@ -48,11 +50,13 @@ def semantic_chunks(text, max_chunk_size=3000):
     for section in sections:
         section_size = len(section.split())
         if current_size + section_size > max_chunk_size and current_chunk:
-            chunks.append({
-                "text": "\n\n".join(current_chunk),
-                "chunk_id": len(chunks),
-                "sections": len(current_chunk),
-            })
+            chunks.append(
+                {
+                    "text": "\n\n".join(current_chunk),
+                    "chunk_id": len(chunks),
+                    "sections": len(current_chunk),
+                }
+            )
             current_chunk = [section]
             current_size = section_size
         else:
@@ -60,11 +64,13 @@ def semantic_chunks(text, max_chunk_size=3000):
             current_size += section_size
 
     if current_chunk:
-        chunks.append({
-            "text": "\n\n".join(current_chunk),
-            "chunk_id": len(chunks),
-            "sections": len(current_chunk),
-        })
+        chunks.append(
+            {
+                "text": "\n\n".join(current_chunk),
+                "chunk_id": len(chunks),
+                "sections": len(current_chunk),
+            }
+        )
     return chunks
 
 
@@ -95,10 +101,7 @@ class RLMMetrics:
 
     def report(self):
         print("\n--- RLM Processing Report ---")
-        print(
-            f"Chunks: {self.processed_chunks}/{self.total_chunks} "
-            f"({self.failed_chunks} failed)"
-        )
+        print(f"Chunks: {self.processed_chunks}/{self.total_chunks} ({self.failed_chunks} failed)")
         print(f"Total time: {self.total_time_seconds:.1f}s")
         print(f"Avg chunk time: {self.avg_chunk_time:.1f}s")
         print(f"Est. remaining: {self.estimated_remaining:.0f}s")
@@ -117,9 +120,7 @@ class ResilientRLMPipeline(dspy.Module):
     def __init__(self, max_retries=3, retry_delay=2.0):
         self.max_retries = max_retries
         self.retry_delay = retry_delay
-        self.analyze = dspy.ChainOfThought(
-            "text, context -> analysis: str, confidence: float"
-        )
+        self.analyze = dspy.ChainOfThought("text, context -> analysis: str, confidence: float")
         self.checkpoints = {}
         self.metrics = RLMMetrics()
 
@@ -137,9 +138,7 @@ class ResilientRLMPipeline(dspy.Module):
                 self.checkpoints[chunk_id] = result
                 return result
             except Exception as e:
-                logger.warning(
-                    f"Chunk {chunk_id}, attempt {attempt + 1}/{self.max_retries}: {e}"
-                )
+                logger.warning(f"Chunk {chunk_id}, attempt {attempt + 1}/{self.max_retries}: {e}")
                 if attempt < self.max_retries - 1:
                     time.sleep(self.retry_delay * (attempt + 1))
                 else:

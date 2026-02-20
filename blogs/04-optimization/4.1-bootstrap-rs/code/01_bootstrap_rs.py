@@ -15,14 +15,24 @@ dspy.configure(lm=lm)
 # Build training set
 trainset = [
     dspy.Example(question="What is the largest planet?", answer="Jupiter").with_inputs("question"),
-    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs("question"),
-    dspy.Example(question="What is the boiling point of water in Celsius?", answer="100").with_inputs("question"),
-    dspy.Example(question="What is the chemical symbol for gold?", answer="Au").with_inputs("question"),
+    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs(
+        "question"
+    ),
+    dspy.Example(
+        question="What is the boiling point of water in Celsius?", answer="100"
+    ).with_inputs("question"),
+    dspy.Example(question="What is the chemical symbol for gold?", answer="Au").with_inputs(
+        "question"
+    ),
     dspy.Example(question="How many continents are there?", answer="7").with_inputs("question"),
     dspy.Example(question="What is the square root of 144?", answer="12").with_inputs("question"),
-    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs("question"),
+    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs(
+        "question"
+    ),
     dspy.Example(question="What is the smallest prime number?", answer="2").with_inputs("question"),
-    dspy.Example(question="What gas do plants absorb?", answer="Carbon dioxide").with_inputs("question"),
+    dspy.Example(question="What gas do plants absorb?", answer="Carbon dioxide").with_inputs(
+        "question"
+    ),
     dspy.Example(question="How many legs does a spider have?", answer="8").with_inputs("question"),
 ]
 

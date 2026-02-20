@@ -16,20 +16,32 @@ dspy.configure(lm=lm)
 # -------------------------------------------------------------------------
 trainset = [
     dspy.Example(question="What is the largest planet?", answer="Jupiter").with_inputs("question"),
-    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs("question"),
-    dspy.Example(question="What is the boiling point of water in Celsius?", answer="100").with_inputs("question"),
-    dspy.Example(question="What is the chemical symbol for gold?", answer="Au").with_inputs("question"),
+    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs(
+        "question"
+    ),
+    dspy.Example(
+        question="What is the boiling point of water in Celsius?", answer="100"
+    ).with_inputs("question"),
+    dspy.Example(question="What is the chemical symbol for gold?", answer="Au").with_inputs(
+        "question"
+    ),
     dspy.Example(question="How many continents are there?", answer="7").with_inputs("question"),
     dspy.Example(question="What is the square root of 144?", answer="12").with_inputs("question"),
-    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs("question"),
+    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs(
+        "question"
+    ),
     dspy.Example(question="What is the smallest prime number?", answer="2").with_inputs("question"),
-    dspy.Example(question="What gas do plants absorb?", answer="Carbon dioxide").with_inputs("question"),
+    dspy.Example(question="What gas do plants absorb?", answer="Carbon dioxide").with_inputs(
+        "question"
+    ),
     dspy.Example(question="How many legs does a spider have?", answer="8").with_inputs("question"),
 ]
 
 devset = [
     dspy.Example(question="What is the capital of France?", answer="Paris").with_inputs("question"),
-    dspy.Example(question="What is the speed of light in km/s?", answer="299792").with_inputs("question"),
+    dspy.Example(question="What is the speed of light in km/s?", answer="299792").with_inputs(
+        "question"
+    ),
     dspy.Example(question="Who discovered gravity?", answer="Isaac Newton").with_inputs("question"),
     dspy.Example(question="What is the longest river?", answer="The Nile").with_inputs("question"),
     dspy.Example(question="What is the currency of Japan?", answer="Yen").with_inputs("question"),
@@ -73,8 +85,10 @@ print("=" * 60)
 
 # Step 1: Start with BootstrapRS for a quick baseline
 tp1 = dspy.BootstrapFewShotWithRandomSearch(
-    metric=metric, max_bootstrapped_demos=2,
-    max_labeled_demos=2, num_candidate_programs=5,
+    metric=metric,
+    max_bootstrapped_demos=2,
+    max_labeled_demos=2,
+    num_candidate_programs=5,
 )
 step1 = tp1.compile(program, trainset=trainset)
 

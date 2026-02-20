@@ -15,12 +15,8 @@ class SentimentAnalysis(dspy.Signature):
 
     review: str = dspy.InputField(desc="A product review from a customer")
     sentiment: str = dspy.OutputField(desc="One of: positive, negative, neutral")
-    confidence: float = dspy.OutputField(
-        desc="Confidence score between 0.0 and 1.0"
-    )
-    reasoning: str = dspy.OutputField(
-        desc="Brief explanation for the sentiment classification"
-    )
+    confidence: float = dspy.OutputField(desc="Confidence score between 0.0 and 1.0")
+    reasoning: str = dspy.OutputField(desc="Brief explanation for the sentiment classification")
 
 
 class Translation(dspy.Signature):
@@ -30,9 +26,7 @@ class Translation(dspy.Signature):
     source_language: str = dspy.InputField(desc="The source language")
     target_language: str = dspy.InputField(desc="The target language")
     translation: str = dspy.OutputField(desc="The translated text")
-    notes: str = dspy.OutputField(
-        desc="Any translation notes about idioms or cultural context"
-    )
+    notes: str = dspy.OutputField(desc="Any translation notes about idioms or cultural context")
 
 
 # ── Tests ─────────────────────────────────────────────────────────────

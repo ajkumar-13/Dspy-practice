@@ -28,6 +28,7 @@ load_dotenv()
 # Data Loading
 # =====================================================
 
+
 def load_corpus(path="data/wiki_abstracts.jsonl"):
     """Load Wikipedia abstracts corpus (JSONL format)."""
     corpus = []
@@ -60,6 +61,7 @@ def load_hover_data(path="data/hover_train.jsonl", max_examples=500):
 # BM25 Retriever
 # =====================================================
 
+
 class BM25Retriever:
     """BM25S-based retriever for Wikipedia abstracts."""
 
@@ -73,9 +75,7 @@ class BM25Retriever:
 
     def __call__(self, query):
         tokenized_query = bm25s.tokenize(query)
-        results, scores = self.retriever.retrieve(
-            tokenized_query, k=self.k
-        )
+        results, scores = self.retriever.retrieve(tokenized_query, k=self.k)
         passages = []
         for idx in results[0]:
             doc = self.corpus[idx]
@@ -87,23 +87,18 @@ class BM25Retriever:
 # DSPy Multi-Hop Research Agent
 # =====================================================
 
+
 class ResearchHop(dspy.Module):
     """A single research hop: search + update notes."""
 
     def __init__(self):
-        self.generate_query = dspy.ChainOfThought(
-            "claim, notes -> search_query"
-        )
-        self.append_notes = dspy.ChainOfThought(
-            "claim, notes, passages -> updated_notes: str"
-        )
+        self.generate_query = dspy.ChainOfThought("claim, notes -> search_query")
+        self.append_notes = dspy.ChainOfThought("claim, notes, passages -> updated_notes: str")
 
     def forward(self, claim, notes, retriever):
         query_pred = self.generate_query(claim=claim, notes=notes)
         passages = retriever(query_pred.search_query)
-        notes_pred = self.append_notes(
-            claim=claim, notes=notes, passages=passages
-        )
+        notes_pred = self.append_notes(claim=claim, notes=notes, passages=passages)
         return notes_pred.updated_notes
 
 
@@ -112,9 +107,7 @@ class MultiHopResearchAgent(dspy.Module):
 
     def __init__(self, num_hops=3):
         self.hops = [ResearchHop() for _ in range(num_hops)]
-        self.verify = dspy.ChainOfThought(
-            "claim, notes -> verdict: bool"
-        )
+        self.verify = dspy.ChainOfThought("claim, notes -> verdict: bool")
 
     def forward(self, claim, retriever):
         notes = "No research notes yet."
@@ -128,9 +121,10 @@ class MultiHopResearchAgent(dspy.Module):
 # Evaluation Metrics
 # =====================================================
 
+
 def extract_titles_from_notes(notes):
     """Extract Wikipedia titles from [brackets] in notes."""
-    return set(re.findall(r'\[([^\]]+)\]', notes))
+    return set(re.findall(r"\[([^\]]+)\]", notes))
 
 
 def recall_metric(example, prediction, trace=None):
@@ -139,10 +133,7 @@ def recall_metric(example, prediction, trace=None):
     if not gold_titles:
         return 1.0
     found = extract_titles_from_notes(prediction.notes)
-    hits = sum(
-        1 for t in gold_titles
-        if any(t.lower() in f.lower() for f in found)
-    )
+    hits = sum(1 for t in gold_titles if any(t.lower() in f.lower() for f in found))
     return hits / len(gold_titles)
 
 
@@ -151,9 +142,7 @@ def recall_metric(example, prediction, trace=None):
 # =====================================================
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="RL-Optimized Research Agent"
-    )
+    parser = argparse.ArgumentParser(description="RL-Optimized Research Agent")
     parser.add_argument(
         "--mode",
         choices=["baseline", "mipro", "rl", "compare"],
@@ -181,12 +170,15 @@ if __name__ == "__main__":
                 super().__init__()
                 self.inner = inner
                 self.ret = ret
+
             def forward(self, claim):
                 return self.inner(claim=claim, retriever=self.ret)
 
         evaluator = Evaluate(
-            devset=devset, metric=recall_metric,
-            num_threads=4, display_progress=True,
+            devset=devset,
+            metric=recall_metric,
+            num_threads=4,
+            display_progress=True,
         )
         baseline_score = evaluator(EvalWrapper(program, retriever))
         print(f"Baseline: {baseline_score:.1f}%")
@@ -206,8 +198,10 @@ if __name__ == "__main__":
             max_labeled_demos=5,
         )
         evaluator = Evaluate(
-            devset=devset, metric=recall_metric,
-            num_threads=4, display_progress=True,
+            devset=devset,
+            metric=recall_metric,
+            num_threads=4,
+            display_progress=True,
         )
         mipro_score = evaluator(EvalWrapper(optimized, retriever))
         print(f"MIPROv2: {mipro_score:.1f}%")
@@ -231,10 +225,12 @@ if __name__ == "__main__":
         dspy.configure(lm=lm)
 
         lora_config = LoraConfig(
-            r=16, lora_alpha=16,
+            r=16,
+            lora_alpha=16,
             target_modules="all-linear",
             lora_dropout=0.05,
-            bias="none", task_type="CAUSAL_LM",
+            bias="none",
+            task_type="CAUSAL_LM",
         )
 
         compiler = ArborGRPO(
@@ -265,8 +261,10 @@ if __name__ == "__main__":
         )
 
         evaluator = Evaluate(
-            devset=devset, metric=recall_metric,
-            num_threads=4, display_progress=True,
+            devset=devset,
+            metric=recall_metric,
+            num_threads=4,
+            display_progress=True,
         )
         rl_score = evaluator(EvalWrapper(rl_optimized, retriever))
         print(f"ArborGRPO: {rl_score:.1f}%")

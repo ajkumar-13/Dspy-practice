@@ -99,6 +99,7 @@ testset = all_examples[8:]
 # Step 2: Define Metric and Optimize Prompts
 # -------------------------------------------------------
 
+
 def classification_metric(example, prediction, trace=None):
     """Check category match. Trace mode is stricter for optimization."""
     pred_cat = prediction.category.strip().lower()
@@ -239,14 +240,20 @@ COST_PER_1M_OUTPUT = {
 
 # Estimate cost per 1000 classifications (~500 tokens input, ~100 tokens output each)
 teacher_cost_1k = (500 * COST_PER_1M_INPUT["gpt-4o"] + 100 * COST_PER_1M_OUTPUT["gpt-4o"]) / 1000
-student_cost_1k = (500 * COST_PER_1M_INPUT["gpt-4o-mini-ft"] + 100 * COST_PER_1M_OUTPUT["gpt-4o-mini-ft"]) / 1000
+student_cost_1k = (
+    500 * COST_PER_1M_INPUT["gpt-4o-mini-ft"] + 100 * COST_PER_1M_OUTPUT["gpt-4o-mini-ft"]
+) / 1000
 
 print(f"\n{'Metric':<25} {'Teacher (GPT-4o)':<20} {'Student (4o-mini FT)':<20}")
 print("-" * 65)
 print(f"{'Accuracy':<25} {teacher_cost_info['score']:<20.1f} {student_cost_info['score']:<20.1f}")
-print(f"{'Avg Latency (s)':<25} {teacher_cost_info['latency']:<20.2f} {student_cost_info['latency']:<20.2f}")
+print(
+    f"{'Avg Latency (s)':<25} {teacher_cost_info['latency']:<20.2f} {student_cost_info['latency']:<20.2f}"
+)
 print(f"{'Cost per 1K calls':<25} ${teacher_cost_1k:<19.4f} ${student_cost_1k:<19.4f}")
-print(f"{'Cost reduction':<25} {'1x (baseline)':<20} {f'{teacher_cost_1k/student_cost_1k:.1f}x cheaper':<20}")
+print(
+    f"{'Cost reduction':<25} {'1x (baseline)':<20} {f'{teacher_cost_1k / student_cost_1k:.1f}x cheaper':<20}"
+)
 
 quality_retention = (student_cost_info["score"] / teacher_cost_info["score"]) * 100
 print(f"\nQuality retention: {quality_retention:.1f}%")
@@ -257,6 +264,10 @@ if quality_retention >= 95:
 elif quality_retention >= 90:
     print("\n\u2705 Good distillation: student retains >90% of teacher quality.")
 elif quality_retention >= 80:
-    print("\n\u26a0\ufe0f Moderate distillation: consider more training data or a closer model gap.")
+    print(
+        "\n\u26a0\ufe0f Moderate distillation: consider more training data or a closer model gap."
+    )
 else:
-    print("\n\u274c Poor distillation: try more training data, a bigger student model, or BetterTogether.")
+    print(
+        "\n\u274c Poor distillation: try more training data, a bigger student model, or BetterTogether."
+    )

@@ -19,8 +19,10 @@ dspy.configure(lm=lm)
 # Part 1: Basic Conversational QA with dspy.History
 # ============================================================
 
+
 class ConversationalQA(dspy.Signature):
     """Answer the user's question, taking into account the conversation history."""
+
     history: dspy.History = dspy.InputField(desc="Previous conversation turns")
     question: str = dspy.InputField(desc="The user's current question")
     answer: str = dspy.OutputField(desc="A helpful, context-aware answer")

@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field, ValidationError
 # Schema: what each example looks like
 # ---------------------------------------------------------------------------
 
+
 class QAExample(BaseModel):
     question: str = Field(description="A clear, specific question")
     answer: str = Field(description="A concise, factual answer (1-3 sentences)")
@@ -54,21 +55,16 @@ seed_examples = [
 # Generator: use CoT with a strong model
 # ---------------------------------------------------------------------------
 
+
 class GenerateExamples(dspy.Signature):
     """Generate diverse, high-quality question-answer pairs for a Python
     programming quiz. Each example should be factually accurate, specific,
     and cover different subtopics. Vary the difficulty levels. Do NOT repeat
     questions similar to the seed examples."""
 
-    seed_examples: str = dspy.InputField(
-        desc="Existing examples to match in style and quality"
-    )
-    topic_focus: str = dspy.InputField(
-        desc="Specific topic area to generate questions about"
-    )
-    num_examples: int = dspy.InputField(
-        desc="Number of examples to generate"
-    )
+    seed_examples: str = dspy.InputField(desc="Existing examples to match in style and quality")
+    topic_focus: str = dspy.InputField(desc="Specific topic area to generate questions about")
+    num_examples: int = dspy.InputField(desc="Number of examples to generate")
     examples_json: str = dspy.OutputField(
         desc="JSON array of generated examples with question, answer, difficulty, topic fields"
     )
@@ -94,6 +90,7 @@ def generate_batch(seeds, topic, batch_size=10):
 # ---------------------------------------------------------------------------
 # Validation: schema + quality checks
 # ---------------------------------------------------------------------------
+
 
 def validate_example(example):
     """Validate against schema and quality criteria. Returns (is_valid, reason)."""
@@ -121,6 +118,7 @@ def validate_example(example):
 # Deduplication: remove near-duplicate questions
 # ---------------------------------------------------------------------------
 
+
 def deduplicate(examples, threshold=0.85):
     """Remove near-duplicate examples based on word-overlap similarity."""
     unique, seen = [], []
@@ -146,6 +144,7 @@ def deduplicate(examples, threshold=0.85):
 # Diversity check
 # ---------------------------------------------------------------------------
 
+
 def check_diversity(examples):
     """Report distribution across difficulty and topics."""
     difficulties = Counter(ex["difficulty"] for ex in examples)
@@ -169,6 +168,7 @@ def check_diversity(examples):
 # ---------------------------------------------------------------------------
 # Full pipeline
 # ---------------------------------------------------------------------------
+
 
 def run_pipeline():
     # Configure teacher LM
@@ -245,9 +245,7 @@ def run_pipeline():
     baseline = evaluator(qa)
     print(f"Baseline: {baseline}")
 
-    optimized = dspy.MIPROv2(metric=metric, auto="medium").compile(
-        qa, trainset=trainset
-    )
+    optimized = dspy.MIPROv2(metric=metric, auto="medium").compile(qa, trainset=trainset)
     opt_score = evaluator(optimized)
     print(f"Optimized: {opt_score}")
 

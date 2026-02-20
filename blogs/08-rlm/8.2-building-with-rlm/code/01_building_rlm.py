@@ -28,8 +28,10 @@ dspy.configure(lm=lm)
 # Pattern 1: Large Document Analysis
 # =====================================================
 
+
 class FinancialAnalysis(dspy.Signature):
     """Analyze a financial report to answer a specific question."""
+
     report: str = dspy.InputField(desc="Full financial report text")
     question: str = dspy.InputField(desc="Analysis question")
     analysis: str = dspy.OutputField(desc="Detailed analysis with evidence")
@@ -106,8 +108,10 @@ if hasattr(result, "trajectory") and result.trajectory:
 # Pattern 2: Multi-Source Cross-Referencing
 # =====================================================
 
+
 class CrossReference(dspy.Signature):
     """Compare multiple sources to answer a question."""
+
     sources: str = dspy.InputField(desc="Multiple data sources, separated by markers")
     question: str = dspy.InputField(desc="Question requiring cross-source reasoning")
     findings: str = dspy.OutputField(desc="Key findings from each source")
@@ -148,8 +152,10 @@ print(f"Conclusion: {result2.conclusion}")
 # Pattern 3: RLM + Retrieval (RAG)
 # =====================================================
 
+
 class AnalyzeEvidence(dspy.Signature):
     """Analyze retrieved evidence to answer a complex question."""
+
     context: str = dspy.InputField(desc="Retrieved evidence passages")
     question: str = dspy.InputField(desc="Question to analyze")
     analysis: str = dspy.OutputField(desc="Detailed analysis based on evidence")
@@ -189,13 +195,16 @@ print(f"Conclusion: {result3.conclusion}")
 # Pattern 4: Custom Tools
 # =====================================================
 
+
 def word_count(text: str) -> int:
     """Count the number of words in a text."""
     return len(text.split())
 
+
 def extract_numbers(text: str) -> list[float]:
     """Extract all numeric values from text."""
     import re
+
     return [float(x) for x in re.findall(r"[\d]+\.?\d*", text.replace(",", ""))]
 
 

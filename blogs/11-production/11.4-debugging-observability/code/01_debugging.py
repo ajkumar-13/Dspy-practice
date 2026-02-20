@@ -18,6 +18,7 @@ load_dotenv()
 # Section 1: Inspecting LM History
 # =====================================================
 
+
 def demo_inspect_history():
     """Use dspy.inspect_history() to see raw prompts and responses."""
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))
@@ -34,6 +35,7 @@ def demo_inspect_history():
 # =====================================================
 # Section 2: Logging
 # =====================================================
+
 
 def demo_logging():
     """Enable DSPy and LiteLLM logging for deep debugging."""
@@ -57,6 +59,7 @@ def demo_logging():
 # =====================================================
 # Section 3: Usage Tracking
 # =====================================================
+
 
 def demo_usage_tracking():
     """Track token usage for cost monitoring."""
@@ -87,6 +90,7 @@ def demo_usage_tracking():
 # Section 4: Cache Debugging
 # =====================================================
 
+
 def demo_cache_debugging():
     """Demonstrate disabling cache for debugging."""
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"), track_usage=True)
@@ -110,6 +114,7 @@ def demo_cache_debugging():
 # Section 5: Assertion Debugging
 # =====================================================
 
+
 def demo_assertion_debugging():
     """Debug assertion failures."""
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))
@@ -120,9 +125,7 @@ def demo_assertion_debugging():
 
         def forward(self, question, **kwargs):
             result = self.predict(question=question)
-            assert len(result.answer) > 50, (
-                "Answer must be at least 50 characters"
-            )
+            assert len(result.answer) > 50, "Answer must be at least 50 characters"
             return result
 
     try:
@@ -137,6 +140,7 @@ def demo_assertion_debugging():
 # =====================================================
 # Section 6: Monitored Module
 # =====================================================
+
 
 class MonitoredModule(dspy.Module):
     """Wrapper that adds observability to any DSPy module."""
@@ -178,12 +182,8 @@ class MonitoredModule(dspy.Module):
             "calls": self.call_count,
             "errors": self.error_count,
             "total_time": round(self.total_time, 3),
-            "avg_time": round(
-                self.total_time / max(self.call_count, 1), 3
-            ),
-            "error_rate": round(
-                self.error_count / max(self.call_count, 1), 4
-            ),
+            "avg_time": round(self.total_time / max(self.call_count, 1), 3),
+            "error_rate": round(self.error_count / max(self.call_count, 1), 4),
         }
 
 
@@ -202,6 +202,7 @@ def demo_monitored_module():
 # =====================================================
 # Section 7: Structured Logging
 # =====================================================
+
 
 class JSONFormatter(logging.Formatter):
     """JSON log formatter for production observability."""
@@ -233,6 +234,7 @@ def demo_structured_logging():
 # =====================================================
 # Section 8: Debugging Workflow
 # =====================================================
+
 
 def demo_debugging_workflow():
     """Complete 5-step debugging workflow."""

@@ -16,6 +16,7 @@ load_dotenv()
 # Image Basics
 # =====================================================
 
+
 def image_basics():
     """Demonstrate dspy.Image creation and usage."""
     lm = dspy.LM("openai/gpt-4o-mini")
@@ -23,8 +24,7 @@ def image_basics():
 
     # Create an image from a URL
     image = dspy.Image.from_url(
-        "https://upload.wikimedia.org/wikipedia/commons/"
-        "thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
     )
 
     # Alternative constructor
@@ -33,10 +33,9 @@ def image_basics():
     # Describe the image
     class DescribeImage(dspy.Signature):
         """Describe the contents of an image in detail."""
+
         current_image: dspy.Image = dspy.InputField()
-        description: str = dspy.OutputField(
-            desc="a detailed description of the image"
-        )
+        description: str = dspy.OutputField(desc="a detailed description of the image")
 
     describer = dspy.Predict(DescribeImage)
     result = describer(current_image=image)
@@ -48,6 +47,7 @@ def image_basics():
 # Image QA with ChainOfThought
 # =====================================================
 
+
 def image_qa():
     """Image question answering with step-by-step reasoning."""
     lm = dspy.LM("openai/gpt-4o-mini")
@@ -55,17 +55,15 @@ def image_qa():
 
     class ImageQA(dspy.Signature):
         """Answer questions about an image."""
+
         image: dspy.Image = dspy.InputField()
         question: str = dspy.InputField()
-        answer: str = dspy.OutputField(
-            desc="concise answer to the question"
-        )
+        answer: str = dspy.OutputField(desc="concise answer to the question")
 
     qa = dspy.ChainOfThought(ImageQA)
     result = qa(
         image=dspy.Image.from_url(
-            "https://upload.wikimedia.org/wikipedia/commons/"
-            "thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
         ),
         question="What animal is in this image, and what is it doing?",
     )
@@ -77,6 +75,7 @@ def image_qa():
 # Iterative Image Prompt Refinement
 # =====================================================
 
+
 def iterative_refinement():
     """Refine image generation prompts using vision feedback."""
     lm = dspy.LM("openai/gpt-4o-mini")
@@ -85,22 +84,13 @@ def iterative_refinement():
     class ImagePromptRefiner(dspy.Signature):
         """Compare a generated image against the desired prompt,
         provide feedback, and produce a revised prompt."""
-        desired_prompt: str = dspy.InputField(
-            desc="what the image should depict"
-        )
-        current_image: dspy.Image = dspy.InputField(
-            desc="the currently generated image"
-        )
-        current_prompt: str = dspy.InputField(
-            desc="the prompt used to generate current_image"
-        )
-        feedback: str = dspy.OutputField(
-            desc="what is wrong or missing in the current image"
-        )
+
+        desired_prompt: str = dspy.InputField(desc="what the image should depict")
+        current_image: dspy.Image = dspy.InputField(desc="the currently generated image")
+        current_prompt: str = dspy.InputField(desc="the prompt used to generate current_image")
+        feedback: str = dspy.OutputField(desc="what is wrong or missing in the current image")
         image_strictly_matches_desired_prompt: bool = dspy.OutputField()
-        revised_prompt: str = dspy.OutputField(
-            desc="improved prompt for image generation"
-        )
+        revised_prompt: str = dspy.OutputField(desc="improved prompt for image generation")
 
     refiner = dspy.Predict(ImagePromptRefiner)
 
@@ -110,9 +100,7 @@ def iterative_refinement():
 
     for i in range(max_iterations):
         # In practice, call an image generation API (e.g., FAL/Flux Pro)
-        generated_image = dspy.Image.from_url(
-            "https://example.com/generated.jpg"
-        )
+        generated_image = dspy.Image.from_url("https://example.com/generated.jpg")
 
         result = refiner(
             desired_prompt=desired,
@@ -135,6 +123,7 @@ def iterative_refinement():
 # Audio Basics
 # =====================================================
 
+
 def audio_basics():
     """Demonstrate dspy.Audio creation and spoken QA."""
     # Create audio from a numpy array (440Hz sine wave)
@@ -149,11 +138,10 @@ def audio_basics():
     # Spoken QA signature
     class SpokenQASignature(dspy.Signature):
         """Answer the question based on the audio clip."""
+
         passage_audio: dspy.Audio = dspy.InputField()
         question: str = dspy.InputField()
-        answer: str = dspy.OutputField(
-            desc="factoid answer between 1 and 5 words"
-        )
+        answer: str = dspy.OutputField(desc="factoid answer between 1 and 5 words")
 
     spoken_qa = dspy.ChainOfThought(SpokenQASignature)
 
@@ -169,6 +157,7 @@ def audio_basics():
 # Structured Image Analysis
 # =====================================================
 
+
 def structured_image_analysis():
     """Complete multi-modal example with structured output."""
     lm = dspy.LM("openai/gpt-4o-mini")
@@ -176,28 +165,18 @@ def structured_image_analysis():
 
     class ImageContentAnalysis(dspy.Signature):
         """Analyze an image and produce structured content analysis."""
+
         image: dspy.Image = dspy.InputField()
-        main_subject: str = dspy.OutputField(
-            desc="primary subject of the image"
-        )
-        setting: str = dspy.OutputField(
-            desc="where the image takes place"
-        )
-        mood: str = dspy.OutputField(
-            desc="overall mood or tone of the image"
-        )
-        colors: list[str] = dspy.OutputField(
-            desc="dominant colors in the image"
-        )
-        description: str = dspy.OutputField(
-            desc="detailed 2-3 sentence description"
-        )
+        main_subject: str = dspy.OutputField(desc="primary subject of the image")
+        setting: str = dspy.OutputField(desc="where the image takes place")
+        mood: str = dspy.OutputField(desc="overall mood or tone of the image")
+        colors: list[str] = dspy.OutputField(desc="dominant colors in the image")
+        description: str = dspy.OutputField(desc="detailed 2-3 sentence description")
 
     analyzer = dspy.ChainOfThought(ImageContentAnalysis)
 
     image = dspy.Image.from_url(
-        "https://upload.wikimedia.org/wikipedia/commons/"
-        "thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
     )
 
     result = analyzer(image=image)
@@ -213,6 +192,7 @@ def structured_image_analysis():
 # Multi-Modal Optimization
 # =====================================================
 
+
 def optimize_image_qa(trainset, devset):
     """Optimize an image QA pipeline with MIPROv2."""
     lm = dspy.LM("openai/gpt-4o-mini")
@@ -220,16 +200,17 @@ def optimize_image_qa(trainset, devset):
 
     class ImageQA(dspy.Signature):
         """Answer questions about an image."""
+
         image: dspy.Image = dspy.InputField()
         question: str = dspy.InputField()
-        answer: str = dspy.OutputField(
-            desc="concise answer to the question"
-        )
+        answer: str = dspy.OutputField(desc="concise answer to the question")
 
     metric = answer_exact_match
     evaluate = dspy.Evaluate(
-        devset=devset, metric=metric,
-        num_threads=4, display_progress=True,
+        devset=devset,
+        metric=metric,
+        num_threads=4,
+        display_progress=True,
     )
 
     qa_module = dspy.ChainOfThought(ImageQA)
@@ -237,10 +218,14 @@ def optimize_image_qa(trainset, devset):
     print(f"Baseline: {baseline_score:.1f}%")
 
     optimizer = dspy.MIPROv2(
-        metric=metric, auto="light", num_threads=4,
+        metric=metric,
+        auto="light",
+        num_threads=4,
     )
     optimized_qa = optimizer.compile(
-        qa_module, trainset=trainset, max_bootstrapped_demos=3,
+        qa_module,
+        trainset=trainset,
+        max_bootstrapped_demos=3,
     )
 
     optimized_score = evaluate(optimized_qa)

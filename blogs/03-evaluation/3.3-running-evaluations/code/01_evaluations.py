@@ -16,7 +16,9 @@ qa = dspy.Predict("question -> answer")
 devset = [
     dspy.Example(question="What is the capital of France?", answer="Paris").with_inputs("question"),
     dspy.Example(question="What is 2 + 2?", answer="4").with_inputs("question"),
-    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs("question"),
+    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs(
+        "question"
+    ),
 ]
 
 

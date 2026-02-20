@@ -16,43 +16,28 @@ load_dotenv()
 # Signatures
 # =====================================================
 
+
 class ImageAnalysisSignature(dspy.Signature):
     """Analyze the visual content of an image, identifying objects, scene,
     artistic style, and dominant colors."""
 
     image: dspy.Image = dspy.InputField()
-    objects: list[str] = dspy.OutputField(
-        desc="objects and subjects detected in the image"
-    )
-    scene_description: str = dspy.OutputField(
-        desc="description of the scene or setting"
-    )
-    visual_style: str = dspy.OutputField(
-        desc="photographic or artistic style"
-    )
-    dominant_colors: list[str] = dspy.OutputField(
-        desc="3-5 dominant colors in the image"
-    )
+    objects: list[str] = dspy.OutputField(desc="objects and subjects detected in the image")
+    scene_description: str = dspy.OutputField(desc="description of the scene or setting")
+    visual_style: str = dspy.OutputField(desc="photographic or artistic style")
+    dominant_colors: list[str] = dspy.OutputField(desc="3-5 dominant colors in the image")
 
 
 class TextAnalysisSignature(dspy.Signature):
     """Analyze accompanying text to extract themes, entities, and intent."""
 
-    text: str = dspy.InputField(
-        desc="the accompanying text (caption, description, etc.)"
-    )
-    key_themes: list[str] = dspy.OutputField(
-        desc="main themes or topics in the text"
-    )
-    entities: list[str] = dspy.OutputField(
-        desc="named entities (people, brands, places)"
-    )
+    text: str = dspy.InputField(desc="the accompanying text (caption, description, etc.)")
+    key_themes: list[str] = dspy.OutputField(desc="main themes or topics in the text")
+    entities: list[str] = dspy.OutputField(desc="named entities (people, brands, places)")
     intent: str = dspy.OutputField(
         desc="communicative intent (e.g., 'promotional', 'informational')"
     )
-    tone: str = dspy.OutputField(
-        desc="writing tone (e.g., 'casual', 'professional', 'humorous')"
-    )
+    tone: str = dspy.OutputField(desc="writing tone (e.g., 'casual', 'professional', 'humorous')")
 
 
 class ContentSynthesisSignature(dspy.Signature):
@@ -75,9 +60,7 @@ class ContentSynthesisSignature(dspy.Signature):
     content_category: str = dspy.OutputField(
         desc="category (e.g., 'product marketing', 'lifestyle', 'news')"
     )
-    target_audience: str = dspy.OutputField(
-        desc="likely target audience for this content"
-    )
+    target_audience: str = dspy.OutputField(desc="likely target audience for this content")
 
 
 class SentimentSignature(dspy.Signature):
@@ -92,14 +75,13 @@ class SentimentSignature(dspy.Signature):
     emotional_tone: str = dspy.OutputField(
         desc="specific emotional tone (e.g., 'aspirational', 'urgent', 'nostalgic')"
     )
-    confidence: float = dspy.OutputField(
-        desc="confidence score from 0.0 to 1.0"
-    )
+    confidence: float = dspy.OutputField(desc="confidence score from 0.0 to 1.0")
 
 
 # =====================================================
 # Component Modules
 # =====================================================
+
 
 class ImageAnalyzer(dspy.Module):
     """Analyze visual content from an image."""
@@ -158,6 +140,7 @@ class SentimentAnalyzer(dspy.Module):
 # Pipeline
 # =====================================================
 
+
 class ContentAnalysisPipeline(dspy.Module):
     """Full multi-modal content analysis: image + text -> structured report."""
 
@@ -196,6 +179,7 @@ class ContentAnalysisPipeline(dspy.Module):
 # Evaluation
 # =====================================================
 
+
 def make_example(image_url, text, content_category, sentiment, intent):
     """Helper to create evaluation examples."""
     return dspy.Example(
@@ -232,6 +216,7 @@ def content_analysis_metric(example, prediction, trace=None):
 # LLM-as-Judge for summary quality
 class SummaryQualityJudge(dspy.Signature):
     """Judge the quality of a multi-modal content summary."""
+
     unified_summary: str = dspy.InputField()
     content_category: str = dspy.InputField()
     expected_category: str = dspy.InputField()
@@ -260,6 +245,7 @@ def enhanced_metric(example, prediction, trace=None):
 # =====================================================
 # Production: Robust Pipeline with Fallback
 # =====================================================
+
 
 class RobustContentAnalysisPipeline(ContentAnalysisPipeline):
     """Production version with fallback handling."""
@@ -320,12 +306,16 @@ if __name__ == "__main__":
             "Good_Food_Display_-_NCI_Visuals_Online.jpg/800px-Good_Food_Display_-_NCI_Visuals_Online.jpg",
             "Fresh organic produce delivered to your door every week! "
             "Use code FRESH20 for 20% off your first order.",
-            "product marketing", "positive", "promotional",
+            "product marketing",
+            "positive",
+            "promotional",
         ),
         make_example(
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg",
             "After months of searching, we finally found our perfect companion.",
-            "lifestyle", "positive", "personal sharing",
+            "lifestyle",
+            "positive",
+            "personal sharing",
         ),
         make_example(
             "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/"
@@ -333,7 +323,9 @@ if __name__ == "__main__":
             "1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg",
             "Van Gogh's Starry Night (1889) remains one of the most "
             "recognized paintings in Western art.",
-            "entertainment", "neutral", "informational",
+            "entertainment",
+            "neutral",
+            "informational",
         ),
     ]
 
@@ -342,7 +334,9 @@ if __name__ == "__main__":
             "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/"
             "PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png",
             "Transparency in design is about building trust.",
-            "informational", "neutral", "informational",
+            "informational",
+            "neutral",
+            "informational",
         ),
     ]
 
@@ -350,8 +344,10 @@ if __name__ == "__main__":
     print("\n--- Baseline Evaluation ---")
     pipeline = ContentAnalysisPipeline()
     evaluate = dspy.Evaluate(
-        devset=devset, metric=content_analysis_metric,
-        num_threads=4, display_progress=True,
+        devset=devset,
+        metric=content_analysis_metric,
+        num_threads=4,
+        display_progress=True,
     )
     baseline_score = evaluate(pipeline)
     print(f"Baseline score: {baseline_score:.1f}%")
@@ -359,11 +355,15 @@ if __name__ == "__main__":
     # Optimize with MIPROv2
     print("\n--- MIPROv2 Optimization ---")
     optimizer = dspy.MIPROv2(
-        metric=content_analysis_metric, auto="light", num_threads=4,
+        metric=content_analysis_metric,
+        auto="light",
+        num_threads=4,
     )
     optimized_pipeline = optimizer.compile(
-        ContentAnalysisPipeline(), trainset=trainset,
-        max_bootstrapped_demos=2, max_labeled_demos=2,
+        ContentAnalysisPipeline(),
+        trainset=trainset,
+        max_bootstrapped_demos=2,
+        max_labeled_demos=2,
     )
     optimized_score = evaluate(optimized_pipeline)
     print(f"Optimized score: {optimized_score:.1f}%")

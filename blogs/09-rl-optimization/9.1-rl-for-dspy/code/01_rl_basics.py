@@ -39,6 +39,7 @@ print(f"Arbor server running at: {arbor_server_info['base_url']}")
 # Step 2: Define DSPy Program
 # =====================================================
 
+
 class SimpleQA(dspy.Module):
     def __init__(self):
         self.answer = dspy.ChainOfThought("question -> answer")
@@ -54,6 +55,7 @@ program = SimpleQA()
 # Step 3: Define Metric and Data
 # =====================================================
 
+
 def answer_metric(example, prediction, trace=None):
     """Simple exact-match metric."""
     gold = example.answer.lower().strip()
@@ -64,9 +66,13 @@ def answer_metric(example, prediction, trace=None):
 trainset = [
     dspy.Example(question="What is the capital of France?", answer="Paris").with_inputs("question"),
     dspy.Example(question="What year did WWII end?", answer="1945").with_inputs("question"),
-    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs("question"),
+    dspy.Example(question="Who wrote Romeo and Juliet?", answer="Shakespeare").with_inputs(
+        "question"
+    ),
     dspy.Example(question="What is the largest planet?", answer="Jupiter").with_inputs("question"),
-    dspy.Example(question="What is the speed of light in m/s?", answer="299792458").with_inputs("question"),
+    dspy.Example(question="What is the speed of light in m/s?", answer="299792458").with_inputs(
+        "question"
+    ),
     # ... add hundreds more examples for meaningful RL training
 ]
 

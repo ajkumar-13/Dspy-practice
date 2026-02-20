@@ -57,8 +57,8 @@ class MultiHopRAG(dspy.Module):
             new_passages = [p for p in passages if p not in context]
             context.extend(new_passages)
 
-            print(f"Hop {hop+1} Query: {query}")
-            print(f"Hop {hop+1} Found: {new_passages}")
+            print(f"Hop {hop + 1} Query: {query}")
+            print(f"Hop {hop + 1} Found: {new_passages}")
 
         # Final answer
         return self.respond(context=context, question=question)

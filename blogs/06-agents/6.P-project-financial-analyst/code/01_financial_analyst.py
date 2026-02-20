@@ -19,6 +19,7 @@ dspy.configure(lm=lm)
 # Step 1: Define Financial Tools
 # ============================================================
 
+
 def get_stock_price(ticker: str) -> str:
     """Get the current stock price and daily change for a ticker symbol.
     Returns price in USD and percentage change from previous close."""
@@ -149,8 +150,10 @@ for query in test_queries:
 # Step 4: Error Handling Decorator
 # ============================================================
 
+
 def with_error_handling(func):
     """Decorator that catches exceptions and returns error messages."""
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
@@ -161,6 +164,7 @@ def with_error_handling(func):
             return f"Error: Request timed out for {func.__name__}. Please try again."
         except Exception as e:
             return f"Error in {func.__name__}: {str(e)}"
+
     return wrapper
 
 

@@ -36,15 +36,14 @@ logger = logging.getLogger("dspy_api")
 # Section 1: Program Definition
 # =====================================================
 
+
 class QASignature(dspy.Signature):
     """Answer a question with detailed reasoning."""
 
     question: str = dspy.InputField(desc="The question to answer")
     answer: str = dspy.OutputField(desc="A clear, comprehensive answer")
     key_concepts: str = dspy.OutputField(desc="Key concepts used in the answer")
-    question_type: str = dspy.OutputField(
-        desc="Type of question: factual, opinion, analytical"
-    )
+    question_type: str = dspy.OutputField(desc="Type of question: factual, opinion, analytical")
 
 
 class QAProgram(dspy.Module):
@@ -61,6 +60,7 @@ class QAProgram(dspy.Module):
 # =====================================================
 # Section 2: Configuration
 # =====================================================
+
 
 class Settings:
     MODEL: str = os.getenv("DSPY_MODEL", "openai/gpt-4o-mini")
@@ -83,6 +83,7 @@ settings = Settings()
 # =====================================================
 # Section 3: Metrics Tracker
 # =====================================================
+
 
 class MetricsTracker:
     def __init__(self):
@@ -108,12 +109,8 @@ class MetricsTracker:
             "uptime_seconds": round(uptime, 1),
             "total_requests": self.total_requests,
             "total_errors": self.total_errors,
-            "error_rate": round(
-                self.total_errors / max(self.total_requests, 1), 4
-            ),
-            "avg_latency": round(
-                sum(self.latencies) / max(len(self.latencies), 1), 3
-            ),
+            "error_rate": round(self.total_errors / max(self.total_requests, 1), 4),
+            "avg_latency": round(sum(self.latencies) / max(len(self.latencies), 1), 3),
             "total_tokens": self.total_tokens,
         }
 
@@ -193,9 +190,12 @@ async def error_handling_middleware(request: Request, call_next):
 # Section 5: Request/Response Models
 # =====================================================
 
+
 class PredictRequest(BaseModel):
     question: str = Field(
-        ..., min_length=1, max_length=10000,
+        ...,
+        min_length=1,
+        max_length=10000,
         description="The question to answer",
     )
 
@@ -211,6 +211,7 @@ class PredictResponse(BaseModel):
 # =====================================================
 # Section 6: Endpoints
 # =====================================================
+
 
 @app.get("/health")
 async def health_check():
@@ -237,8 +238,7 @@ async def predict(request: PredictRequest):
         usage = result.get_lm_usage() if settings.TRACK_USAGE else {}
         metrics.record_request(latency, usage)
         logger.info(
-            f"Predicted in {latency:.3f}s | "
-            f"Q: {request.question[:50]}... | Tokens: {usage}"
+            f"Predicted in {latency:.3f}s | Q: {request.question[:50]}... | Tokens: {usage}"
         )
         return PredictResponse(
             answer=result.answer,
@@ -250,9 +250,7 @@ async def predict(request: PredictRequest):
     except dspy.DSPyAssertionError as e:
         metrics.record_error()
         logger.warning(f"Assertion failed: {e}")
-        raise HTTPException(
-            status_code=422, detail=f"Validation error: {str(e)}"
-        )
+        raise HTTPException(status_code=422, detail=f"Validation error: {str(e)}")
     except Exception as e:
         metrics.record_error()
         logger.error(f"Prediction failed: {e}", exc_info=True)
@@ -270,24 +268,26 @@ async def predict_stream(request: PredictRequest):
             output = streaming_program(question=request.question)
             async for chunk in output:
                 if isinstance(chunk, dspy.streaming.StreamResponse):
-                    data = json.dumps({
-                        "type": "token",
-                        "field": chunk.signature_field_name,
-                        "content": chunk.chunk,
-                    })
+                    data = json.dumps(
+                        {
+                            "type": "token",
+                            "field": chunk.signature_field_name,
+                            "content": chunk.chunk,
+                        }
+                    )
                     yield f"data: {data}\n\n"
                 elif isinstance(chunk, dspy.Prediction):
                     latency = time.time() - start
-                    usage = (
-                        chunk.get_lm_usage() if settings.TRACK_USAGE else {}
-                    )
+                    usage = chunk.get_lm_usage() if settings.TRACK_USAGE else {}
                     metrics.record_request(latency, usage)
-                    data = json.dumps({
-                        "type": "complete",
-                        "answer": chunk.answer,
-                        "usage": usage,
-                        "latency_seconds": round(latency, 3),
-                    })
+                    data = json.dumps(
+                        {
+                            "type": "complete",
+                            "answer": chunk.answer,
+                            "usage": usage,
+                            "latency_seconds": round(latency, 3),
+                        }
+                    )
                     yield f"data: {data}\n\n"
         except Exception as e:
             metrics.record_error()
@@ -332,10 +332,12 @@ async def batch_predict(questions: list[PredictRequest]):
 # Section 7: Optimization Script
 # =====================================================
 
+
 def run_optimization():
     """Run MIPROv2 optimization and save state."""
     dspy.configure(
-        lm=dspy.LM(settings.MODEL), track_usage=True,
+        lm=dspy.LM(settings.MODEL),
+        track_usage=True,
     )
 
     program = QAProgram()
@@ -350,10 +352,7 @@ def run_optimization():
         ).with_inputs("question"),
         dspy.Example(
             question="What causes earthquakes?",
-            answer=(
-                "Earthquakes are caused by tectonic plate movements "
-                "releasing stored energy."
-            ),
+            answer=("Earthquakes are caused by tectonic plate movements releasing stored energy."),
         ).with_inputs("question"),
     ]
 
@@ -377,6 +376,7 @@ if __name__ == "__main__":
         run_optimization()
     else:
         import uvicorn
+
         uvicorn.run(
             "01_deployment:app",
             host=settings.HOST,

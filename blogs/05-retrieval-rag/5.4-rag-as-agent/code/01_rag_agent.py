@@ -24,11 +24,13 @@ corpus = [
 embedder = dspy.Embedder("openai/text-embedding-3-small", dimensions=512)
 retriever = dspy.retrievers.Embeddings(embedder=embedder, corpus=corpus, k=3)
 
+
 # Define tools
 def search_wikipedia(query: str) -> str:
     """Searches Wikipedia for the given query and returns snippets."""
     results = retriever(query)
     return "\n\n".join(results)
+
 
 def calculate_years_ago(year: str) -> str:
     """Calculates how many years ago a given year was (assuming current year is 2025)."""
@@ -38,6 +40,7 @@ def calculate_years_ago(year: str) -> str:
         return f"{diff} years ago"
     except ValueError:
         return "Invalid year format"
+
 
 # Create the ReAct agent
 # dspy.ReAct takes a signature and a list of tool functions

@@ -15,14 +15,13 @@ load_dotenv()
 # TTS Pipeline: Emotion-Aware Speech Synthesis
 # =====================================================
 
+
 class EmotionStylePromptSignature(dspy.Signature):
     """Generate a TTS instruction that will make the speech model
     deliver the given line in the specified emotional style."""
 
     raw_line: str = dspy.InputField(desc="the text line to be spoken")
-    target_style: str = dspy.InputField(
-        desc="desired emotional style, e.g., 'excited', 'sad'"
-    )
+    target_style: str = dspy.InputField(desc="desired emotional style, e.g., 'excited', 'sad'")
     openai_instruction: str = dspy.OutputField(
         desc="detailed instruction for the TTS model describing "
         "voice qualities, pacing, tone, and emotional delivery"
@@ -33,11 +32,10 @@ class EmotionStylePrompter(dspy.Module):
     """Generate emotion-styled speech from text using optimizable prompts."""
 
     def __init__(self):
-        self.generate_instruction = dspy.ChainOfThought(
-            EmotionStylePromptSignature
-        )
+        self.generate_instruction = dspy.ChainOfThought(EmotionStylePromptSignature)
         # OpenAI client for direct TTS API calls
         from openai import OpenAI
+
         self.openai_client = OpenAI()
 
     def forward(self, raw_line: str, target_style: str):
@@ -70,25 +68,25 @@ class EmotionStylePrompter(dspy.Module):
 # Audio Similarity Metric (Wav2Vec 2.0)
 # =====================================================
 
+
 class AudioSimilarityMetric:
     """Compute cosine similarity between audio embeddings."""
 
     def __init__(self):
         import torch
         from transformers import Wav2Vec2Model, Wav2Vec2Processor
-        self.processor = Wav2Vec2Processor.from_pretrained(
-            "facebook/wav2vec2-base"
-        )
-        self.model = Wav2Vec2Model.from_pretrained(
-            "facebook/wav2vec2-base"
-        )
+
+        self.processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base")
+        self.model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base")
         self.model.eval()
         self.torch = torch
 
     def get_embedding(self, audio_array, sampling_rate=16000):
         inputs = self.processor(
-            audio_array, sampling_rate=sampling_rate,
-            return_tensors="pt", padding=True,
+            audio_array,
+            sampling_rate=sampling_rate,
+            return_tensors="pt",
+            padding=True,
         )
         with self.torch.no_grad():
             outputs = self.model(**inputs)
@@ -98,7 +96,8 @@ class AudioSimilarityMetric:
         ref_emb = self.get_embedding(example.reference_audio_array)
         pred_emb = self.get_embedding(prediction.audio_array)
         similarity = self.torch.nn.functional.cosine_similarity(
-            ref_emb.unsqueeze(0), pred_emb.unsqueeze(0),
+            ref_emb.unsqueeze(0),
+            pred_emb.unsqueeze(0),
         ).item()
         return similarity
 
@@ -107,28 +106,19 @@ class AudioSimilarityMetric:
 # Iterative Image Generation Pipeline
 # =====================================================
 
+
 class ImagePromptRefiner(dspy.Signature):
     """Analyze a generated image, compare it with the desired prompt,
     and produce a revised prompt for better results."""
 
-    desired_prompt: str = dspy.InputField(
-        desc="what the image should depict"
-    )
-    current_image: dspy.Image = dspy.InputField(
-        desc="the currently generated image"
-    )
-    current_prompt: str = dspy.InputField(
-        desc="the prompt used to generate current_image"
-    )
-    feedback: str = dspy.OutputField(
-        desc="detailed analysis of what is wrong or missing"
-    )
+    desired_prompt: str = dspy.InputField(desc="what the image should depict")
+    current_image: dspy.Image = dspy.InputField(desc="the currently generated image")
+    current_prompt: str = dspy.InputField(desc="the prompt used to generate current_image")
+    feedback: str = dspy.OutputField(desc="detailed analysis of what is wrong or missing")
     image_strictly_matches_desired_prompt: bool = dspy.OutputField(
         desc="True only if the image perfectly matches"
     )
-    revised_prompt: str = dspy.OutputField(
-        desc="improved prompt that addresses the feedback"
-    )
+    revised_prompt: str = dspy.OutputField(desc="improved prompt that addresses the feedback")
 
 
 class IterativeImageGenerator(dspy.Module):
@@ -176,8 +166,10 @@ class IterativeImageGenerator(dspy.Module):
 # Custom Multi-Modal Analyzer
 # =====================================================
 
+
 class VisualAnalysis(dspy.Signature):
     """Analyze the visual content of an image."""
+
     image: dspy.Image = dspy.InputField()
     objects: list[str] = dspy.OutputField(desc="objects detected")
     scene_description: str = dspy.OutputField(desc="scene description")
@@ -186,16 +178,13 @@ class VisualAnalysis(dspy.Signature):
 
 class ContentSynthesis(dspy.Signature):
     """Synthesize visual analysis with text into a cohesive summary."""
+
     scene_description: str = dspy.InputField()
     objects: list[str] = dspy.InputField()
     visual_style: str = dspy.InputField()
     accompanying_text: str = dspy.InputField()
-    summary: str = dspy.OutputField(
-        desc="cohesive summary combining visual and textual content"
-    )
-    key_themes: list[str] = dspy.OutputField(
-        desc="main themes across both modalities"
-    )
+    summary: str = dspy.OutputField(desc="cohesive summary combining visual and textual content")
+    key_themes: list[str] = dspy.OutputField(desc="main themes across both modalities")
 
 
 class MultiModalAnalyzer(dspy.Module):
@@ -226,8 +215,10 @@ class MultiModalAnalyzer(dspy.Module):
 # Image Quality Judge (LLM-as-Judge)
 # =====================================================
 
+
 class ImageQualityJudge(dspy.Signature):
     """Judge whether the generated image matches the description."""
+
     image: dspy.Image = dspy.InputField()
     desired_description: str = dspy.InputField()
     quality_score: float = dspy.OutputField(desc="score from 0.0 to 1.0")
@@ -261,9 +252,7 @@ if __name__ == "__main__":
     # Iterative image generation
     print("\n--- Iterative Image Generation ---")
     generator = IterativeImageGenerator(max_iterations=3)
-    result = generator(
-        desired_prompt="A watercolor painting of a lighthouse during a storm"
-    )
+    result = generator(desired_prompt="A watercolor painting of a lighthouse during a storm")
     print(f"Converged in {result.iterations} iterations")
     print(f"Final prompt: {result.final_prompt}")
 
@@ -272,8 +261,7 @@ if __name__ == "__main__":
     analyzer = MultiModalAnalyzer()
     result = analyzer(
         image=dspy.Image.from_url(
-            "https://upload.wikimedia.org/wikipedia/commons/"
-            "thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
         ),
         accompanying_text="Meet our newest rescue cat! Adoption is the best.",
     )

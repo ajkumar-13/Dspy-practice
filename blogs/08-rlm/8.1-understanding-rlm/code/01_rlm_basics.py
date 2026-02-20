@@ -78,8 +78,8 @@ if hasattr(result, "trajectory") and result.trajectory:
 print("\n=== RLM with max_iterations ===")
 rlm_controlled = dspy.RLM(
     "context, question -> answer",
-    max_iterations=5,   # Limit exploration steps
-    verbose=True,       # Print REPL steps in real-time
+    max_iterations=5,  # Limit exploration steps
+    verbose=True,  # Print REPL steps in real-time
 )
 
 result2 = rlm_controlled(

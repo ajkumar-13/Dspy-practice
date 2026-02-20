@@ -17,7 +17,9 @@ class TicketClassification(dspy.Signature):
     ticket: str = dspy.InputField(desc="The customer support ticket text")
     priority: str = dspy.OutputField(desc="One of: Urgent, Standard, Low")
     category: str = dspy.OutputField(desc="Category like: Billing, Technical, Account, Shipping")
-    sentiment: str = dspy.OutputField(desc="Customer sentiment: Angry, Frustrated, Neutral, Satisfied")
+    sentiment: str = dspy.OutputField(
+        desc="Customer sentiment: Angry, Frustrated, Neutral, Satisfied"
+    )
     summary: str = dspy.OutputField(desc="One-sentence summary of the issue")
 
 

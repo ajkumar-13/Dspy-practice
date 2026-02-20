@@ -15,6 +15,7 @@ dspy.configure(lm=lm)
 
 # --- Define tools as plain Python functions ---
 
+
 def get_weather(city: str) -> str:
     """Get the current weather for a city. Returns temperature and conditions."""
     weather_data = {

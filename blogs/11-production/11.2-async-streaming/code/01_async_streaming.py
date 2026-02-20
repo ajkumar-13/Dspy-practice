@@ -17,6 +17,7 @@ load_dotenv()
 # Section 1: Basic Async Usage
 # =====================================================
 
+
 async def demo_basic_async():
     """Basic async call with acall()."""
     predict = dspy.Predict("question -> answer")
@@ -44,6 +45,7 @@ async def demo_concurrent_async():
 # =====================================================
 # Section 2: Custom Async Modules
 # =====================================================
+
 
 class AsyncPipeline(dspy.Module):
     """Two-step async pipeline: analyze then summarize."""
@@ -73,6 +75,7 @@ async def demo_async_pipeline():
 # Section 3: Output Token Streaming
 # =====================================================
 
+
 async def demo_basic_streaming():
     """Stream tokens from a ChainOfThought program."""
     program = dspy.ChainOfThought("question -> answer")
@@ -92,6 +95,7 @@ async def demo_basic_streaming():
 # =====================================================
 # Section 4: Status Message Streaming
 # =====================================================
+
 
 class MyStatusProvider(StatusMessageProvider):
     """Custom status messages for pipeline progress."""
@@ -137,6 +141,7 @@ async def demo_status_streaming():
 # Section 5: Complete Async Streaming Pipeline
 # =====================================================
 
+
 class ResearchPipeline(dspy.Module):
     """Multi-step research pipeline with async support."""
 
@@ -147,7 +152,8 @@ class ResearchPipeline(dspy.Module):
     async def aforward(self, question, **kwargs):
         analysis = await self.analyze.acall(question=question)
         return await self.synthesize.acall(
-            question=question, key_points=analysis.key_points,
+            question=question,
+            key_points=analysis.key_points,
         )
 
 
@@ -163,7 +169,8 @@ async def demo_complete_pipeline():
     """Full async streaming pipeline with status messages."""
     pipeline = ResearchPipeline()
     listener = StreamListener(
-        signature_field_name="answer", predict_name="synthesize",
+        signature_field_name="answer",
+        predict_name="synthesize",
     )
     streaming_pipeline = dspy.streamify(
         pipeline,
@@ -187,6 +194,7 @@ async def demo_complete_pipeline():
 # =====================================================
 # Main
 # =====================================================
+
 
 async def main():
     dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))

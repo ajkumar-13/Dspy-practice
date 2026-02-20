@@ -16,6 +16,7 @@ load_dotenv()
 lm = dspy.LM("openai/gpt-4o-mini")
 dspy.configure(lm=lm)
 
+
 # Step 2: Define the base program
 class QA(dspy.Module):
     def __init__(self):
@@ -24,15 +25,23 @@ class QA(dspy.Module):
     def forward(self, question):
         return self.answer(question=question)
 
+
 # Step 3: Prepare training data
 trainset = [
     dspy.Example(question="What is the capital of France?", answer="Paris").with_inputs("question"),
     dspy.Example(question="Who wrote Hamlet?", answer="Shakespeare").with_inputs("question"),
-    dspy.Example(question="What is the speed of light in m/s?", answer="299792458").with_inputs("question"),
-    dspy.Example(question="What element has atomic number 79?", answer="Gold").with_inputs("question"),
-    dspy.Example(question="In what year did World War II end?", answer="1945").with_inputs("question"),
+    dspy.Example(question="What is the speed of light in m/s?", answer="299792458").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="What element has atomic number 79?", answer="Gold").with_inputs(
+        "question"
+    ),
+    dspy.Example(question="In what year did World War II end?", answer="1945").with_inputs(
+        "question"
+    ),
     # Include more examples for best results
 ]
+
 
 # Step 4: Define a metric
 def exact_match(example, prediction, trace=None):
@@ -91,8 +100,12 @@ sampled_combined = sampled_ensemble.compile(programs)
 # Evaluate
 # -------------------------------------------------------
 devset = [
-    dspy.Example(question="What is the largest planet in our solar system?", answer="Jupiter").with_inputs("question"),
-    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs("question"),
+    dspy.Example(
+        question="What is the largest planet in our solar system?", answer="Jupiter"
+    ).with_inputs("question"),
+    dspy.Example(question="Who painted the Mona Lisa?", answer="Leonardo da Vinci").with_inputs(
+        "question"
+    ),
 ]
 
 evaluator = Evaluate(devset=devset, metric=exact_match, num_threads=4, display_progress=True)

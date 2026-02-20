@@ -20,6 +20,7 @@ dspy.configure(lm=lm)
 
 # ── Step 1: Load the Dataset ─────────────────────────────────────────────────
 
+
 def load_hotpotqa(num_examples=50):
     """Load a subset of HotPotQA for evaluation."""
     raw = load_dataset("hotpot_qa", "fullwiki", split=f"validation[:{num_examples}]")
@@ -38,6 +39,7 @@ def load_hotpotqa(num_examples=50):
 
 
 # ── Step 2: Define Multiple Metrics ───────────────────────────────────────────
+
 
 def metric_exact_match(example, pred, trace=None):
     return answer_exact_match(example, pred)
@@ -63,8 +65,10 @@ METRICS = {
 
 # ── Step 3: Build Program Variants ───────────────────────────────────────────
 
+
 class AnswerQuestion(dspy.Signature):
     """Answer the question concisely and accurately."""
+
     question: str = dspy.InputField()
     answer: str = dspy.OutputField(desc="A concise, factual answer")
 
@@ -75,9 +79,7 @@ cot_program = dspy.ChainOfThought(AnswerQuestion)
 
 class DecomposeAndAnswer(dspy.Module):
     def __init__(self):
-        self.decompose = dspy.ChainOfThought(
-            "question -> sub_questions: list[str]"
-        )
+        self.decompose = dspy.ChainOfThought("question -> sub_questions: list[str]")
         self.answer = dspy.ChainOfThought(AnswerQuestion)
 
     def forward(self, question):
@@ -98,6 +100,7 @@ PROGRAMS = {
 
 
 # ── Step 4: Run Evaluations ──────────────────────────────────────────────────
+
 
 def run_evaluation_grid(programs, metrics, devset, num_threads=16):
     """Evaluate all programs against all metrics. Returns a results dict."""
@@ -129,6 +132,7 @@ def run_evaluation_grid(programs, metrics, devset, num_threads=16):
 
 
 # ── Step 5: Compare and Analyze ──────────────────────────────────────────────
+
 
 def print_comparison_table(results):
     """Print a formatted comparison table of evaluation results."""
@@ -166,6 +170,7 @@ def print_comparison_table(results):
 
 
 # ── Step 6: Save Results ─────────────────────────────────────────────────────
+
 
 def save_results(results, filepath="eval_results.json"):
     """Append evaluation results to a JSON file for historical tracking."""

@@ -16,9 +16,10 @@ dspy.configure(lm=lm)
 # Part 1: The dspy.Tool class
 # ============================================================
 
+
 def search_web(query: str, max_results: int = 5) -> list[str]:
     """Search the web for information. Returns a list of relevant snippets."""
-    return [f"Result {i+1} for '{query}'" for i in range(max_results)]
+    return [f"Result {i + 1} for '{query}'" for i in range(max_results)]
 
 
 # Wrap with dspy.Tool for explicit control
@@ -47,6 +48,7 @@ print(f"Part 1 (dspy.Tool) Answer: {result.answer}")
 # Part 2: Manual tool handling with ToolCalls
 # ============================================================
 
+
 def get_stock_price(ticker: str) -> str:
     """Get the current stock price for a ticker symbol."""
     prices = {"AAPL": "187.50", "GOOGL": "141.20", "MSFT": "378.90"}
@@ -62,6 +64,7 @@ def get_exchange_rate(from_currency: str, to_currency: str) -> str:
 
 class ToolSelector(dspy.Signature):
     """Decide which tool to call based on the user's question."""
+
     question: str = dspy.InputField()
     tool_calls: dspy.ToolCalls = dspy.OutputField()
 

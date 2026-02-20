@@ -16,7 +16,9 @@ dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))
 
 class LegalEntity(BaseModel):
     name: str = Field(description="Full name of the entity")
-    role: str = Field(description="Role in the document: plaintiff, defendant, witness, judge, attorney")
+    role: str = Field(
+        description="Role in the document: plaintiff, defendant, witness, judge, attorney"
+    )
 
 
 class MonetaryAmount(BaseModel):
@@ -35,9 +37,7 @@ class ExtractedLegalInfo(BaseModel):
 
 class LegalDocExtractor(dspy.Module):
     def __init__(self):
-        self.extract = dspy.ChainOfThought(
-            "document: str -> extracted_info: ExtractedLegalInfo"
-        )
+        self.extract = dspy.ChainOfThought("document: str -> extracted_info: ExtractedLegalInfo")
 
     def forward(self, document: str):
         result = self.extract(document=document)

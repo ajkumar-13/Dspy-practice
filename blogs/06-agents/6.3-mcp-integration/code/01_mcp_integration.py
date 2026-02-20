@@ -20,6 +20,7 @@ dspy.configure(lm=lm)
 # Part 1: Remote MCP Server (HTTP)
 # ============================================================
 
+
 async def remote_mcp_demo():
     """Connect to a remote MCP server via Streamable HTTP."""
     server_url = "http://localhost:8080/mcp"
@@ -35,10 +36,7 @@ async def remote_mcp_demo():
                 print(f"  - {tool.name}: {tool.description}")
 
             # Convert MCP tools to DSPy tools
-            dspy_tools = [
-                dspy.Tool.from_mcp_tool(session, tool)
-                for tool in mcp_tools.tools
-            ]
+            dspy_tools = [dspy.Tool.from_mcp_tool(session, tool) for tool in mcp_tools.tools]
 
             # Build a ReAct agent with MCP tools
             agent = dspy.ReAct(
@@ -47,15 +45,14 @@ async def remote_mcp_demo():
                 max_iters=8,
             )
 
-            result = await agent.acall(
-                question="Search for recent news about AI agents"
-            )
+            result = await agent.acall(question="Search for recent news about AI agents")
             print(f"\nAnswer: {result.answer}")
 
 
 # ============================================================
 # Part 2: Local MCP Server (Stdio)
 # ============================================================
+
 
 async def local_mcp_demo():
     """Connect to a local MCP server via stdio."""
@@ -74,10 +71,7 @@ async def local_mcp_demo():
             mcp_tools = await session.list_tools()
             print(f"Found {len(mcp_tools.tools)} tools from filesystem server")
 
-            dspy_tools = [
-                dspy.Tool.from_mcp_tool(session, tool)
-                for tool in mcp_tools.tools
-            ]
+            dspy_tools = [dspy.Tool.from_mcp_tool(session, tool) for tool in mcp_tools.tools]
 
             agent = dspy.ReAct(
                 "question -> answer",
@@ -85,9 +79,7 @@ async def local_mcp_demo():
                 max_iters=6,
             )
 
-            result = await agent.acall(
-                question="What files are in the documents directory?"
-            )
+            result = await agent.acall(question="What files are in the documents directory?")
             print(f"\nAnswer: {result.answer}")
 
 
@@ -95,14 +87,12 @@ async def local_mcp_demo():
 # Part 3: Hybrid Agent (MCP + Local Tools)
 # ============================================================
 
+
 async def build_hybrid_agent(session, mcp_tools_list):
     """Build an agent with both MCP and local tools."""
 
     # Convert MCP tools
-    mcp_dspy_tools = [
-        dspy.Tool.from_mcp_tool(session, tool)
-        for tool in mcp_tools_list
-    ]
+    mcp_dspy_tools = [dspy.Tool.from_mcp_tool(session, tool) for tool in mcp_tools_list]
 
     # Local tools
     def calculate(expression: str) -> str:

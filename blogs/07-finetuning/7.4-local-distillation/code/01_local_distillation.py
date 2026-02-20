@@ -14,6 +14,7 @@ from dspy.evaluate import Evaluate, SemanticF1
 # Step 1: Define the task and training data
 # ---------------------------------------------------------------------------
 
+
 class TechnicalQA(dspy.Signature):
     """Answer technical programming questions with clear, accurate explanations."""
 
@@ -60,6 +61,7 @@ devset = [
 # Step 2: Optimize on the teacher model
 # ---------------------------------------------------------------------------
 
+
 def optimize_teacher():
     """Optimize the program using the API model."""
     teacher_lm = dspy.LM("openai/gpt-4o")
@@ -83,6 +85,7 @@ def optimize_teacher():
 # Step 3: Distill to local model
 # ---------------------------------------------------------------------------
 
+
 def distill_to_local(optimized_teacher):
     """Distill the optimized teacher to a local Ollama model."""
     student_lm = dspy.LM(
@@ -105,12 +108,11 @@ def distill_to_local(optimized_teacher):
 # Step 4: Evaluate and compare
 # ---------------------------------------------------------------------------
 
+
 def compare(optimized_teacher, distilled):
     """Compare teacher vs student on the dev set."""
     teacher_lm = dspy.LM("openai/gpt-4o")
-    student_lm = dspy.LM(
-        "ollama_chat/llama3.2", api_base="http://localhost:11434"
-    )
+    student_lm = dspy.LM("ollama_chat/llama3.2", api_base="http://localhost:11434")
 
     def metric(ex, pred, trace=None):
         return SemanticF1()(ex, pred, trace)
@@ -133,6 +135,7 @@ def compare(optimized_teacher, distilled):
 # ---------------------------------------------------------------------------
 # Step 5: Benchmark latency
 # ---------------------------------------------------------------------------
+
 
 def benchmark(program, questions, lm):
     """Benchmark a program on a list of questions."""

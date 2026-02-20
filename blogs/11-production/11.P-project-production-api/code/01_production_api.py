@@ -35,15 +35,14 @@ logger = logging.getLogger("dspy_api")
 # Section 1: DSPy Program Definition
 # =====================================================
 
+
 class QASignature(dspy.Signature):
     """Answer a question with detailed reasoning."""
 
     question: str = dspy.InputField(desc="The question to answer")
     answer: str = dspy.OutputField(desc="A clear, comprehensive answer")
     key_concepts: str = dspy.OutputField(desc="Key concepts used")
-    question_type: str = dspy.OutputField(
-        desc="Type: factual, opinion, analytical"
-    )
+    question_type: str = dspy.OutputField(desc="Type: factual, opinion, analytical")
 
 
 class QAProgram(dspy.Module):
@@ -61,28 +60,17 @@ class QAProgram(dspy.Module):
 # Section 2: Configuration
 # =====================================================
 
+
 class Settings:
     MODEL: str = os.getenv("DSPY_MODEL", "openai/gpt-4o-mini")
     TRACK_USAGE: bool = os.getenv("TRACK_USAGE", "true").lower() == "true"
-    CACHE_DISK_ENABLED: bool = (
-        os.getenv("CACHE_DISK_ENABLED", "true").lower() == "true"
-    )
-    CACHE_MEMORY_ENABLED: bool = (
-        os.getenv("CACHE_MEMORY_ENABLED", "true").lower() == "true"
-    )
-    CACHE_DISK_SIZE: int = int(
-        os.getenv("CACHE_DISK_SIZE", str(5_000_000_000))
-    )
-    CACHE_MEMORY_ENTRIES: int = int(
-        os.getenv("CACHE_MEMORY_ENTRIES", str(2_000_000))
-    )
+    CACHE_DISK_ENABLED: bool = os.getenv("CACHE_DISK_ENABLED", "true").lower() == "true"
+    CACHE_MEMORY_ENABLED: bool = os.getenv("CACHE_MEMORY_ENABLED", "true").lower() == "true"
+    CACHE_DISK_SIZE: int = int(os.getenv("CACHE_DISK_SIZE", str(5_000_000_000)))
+    CACHE_MEMORY_ENTRIES: int = int(os.getenv("CACHE_MEMORY_ENTRIES", str(2_000_000)))
     PROGRAM_STATE_PATH: str | None = os.getenv("PROGRAM_STATE_PATH")
-    ENABLE_STREAMING: bool = (
-        os.getenv("ENABLE_STREAMING", "true").lower() == "true"
-    )
-    ENABLE_METRICS: bool = (
-        os.getenv("ENABLE_METRICS", "true").lower() == "true"
-    )
+    ENABLE_STREAMING: bool = os.getenv("ENABLE_STREAMING", "true").lower() == "true"
+    ENABLE_METRICS: bool = os.getenv("ENABLE_METRICS", "true").lower() == "true"
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
     WORKERS: int = int(os.getenv("WORKERS", "1"))
@@ -94,6 +82,7 @@ settings = Settings()
 # =====================================================
 # Section 3: Metrics Tracker
 # =====================================================
+
 
 class MetricsTracker:
     def __init__(self):
@@ -120,20 +109,14 @@ class MetricsTracker:
             "uptime_seconds": round(uptime, 1),
             "total_requests": self.total_requests,
             "total_errors": self.total_errors,
-            "error_rate": round(
-                self.total_errors / max(self.total_requests, 1), 4
-            ),
+            "error_rate": round(self.total_errors / max(self.total_requests, 1), 4),
             "avg_latency_seconds": round(avg_lat, 3),
             "p95_latency_seconds": round(
-                sorted(self.latencies)[int(len(self.latencies) * 0.95)]
-                if self.latencies
-                else 0,
+                sorted(self.latencies)[int(len(self.latencies) * 0.95)] if self.latencies else 0,
                 3,
             ),
             "total_tokens": self.total_tokens,
-            "requests_per_second": round(
-                self.total_requests / max(uptime, 1), 2
-            ),
+            "requests_per_second": round(self.total_requests / max(uptime, 1), 2),
         }
 
 
@@ -170,9 +153,7 @@ async def lifespan(app: FastAPI):
 
     if settings.ENABLE_STREAMING:
         listener = StreamListener(signature_field_name="answer")
-        streaming_program = dspy.streamify(
-            program, stream_listeners=[listener]
-        )
+        streaming_program = dspy.streamify(program, stream_listeners=[listener])
         logger.info("Streaming enabled")
 
     logger.info(f"API ready | model={settings.MODEL}")
@@ -218,9 +199,12 @@ async def error_handling_middleware(request: Request, call_next):
 # Section 6: Models
 # =====================================================
 
+
 class PredictRequest(BaseModel):
     question: str = Field(
-        ..., min_length=1, max_length=10000,
+        ...,
+        min_length=1,
+        max_length=10000,
         description="The question to answer",
     )
 
@@ -236,6 +220,7 @@ class PredictResponse(BaseModel):
 # =====================================================
 # Section 7: Endpoints
 # =====================================================
+
 
 @app.get("/health")
 async def health_check():
@@ -263,8 +248,7 @@ async def predict(request: PredictRequest):
         usage = result.get_lm_usage() if settings.TRACK_USAGE else {}
         metrics.record_request(latency, usage)
         logger.info(
-            f"Predicted in {latency:.3f}s | "
-            f"Q: {request.question[:50]}... | Tokens: {usage}"
+            f"Predicted in {latency:.3f}s | Q: {request.question[:50]}... | Tokens: {usage}"
         )
         return PredictResponse(
             answer=result.answer,
@@ -276,9 +260,7 @@ async def predict(request: PredictRequest):
     except dspy.DSPyAssertionError as e:
         metrics.record_error()
         logger.warning(f"Assertion failed: {e}")
-        raise HTTPException(
-            status_code=422, detail=f"Validation error: {str(e)}"
-        )
+        raise HTTPException(status_code=422, detail=f"Validation error: {str(e)}")
     except Exception as e:
         metrics.record_error()
         logger.error(f"Prediction failed: {e}", exc_info=True)
@@ -296,26 +278,26 @@ async def predict_stream(request: PredictRequest):
             output = streaming_program(question=request.question)
             async for chunk in output:
                 if isinstance(chunk, dspy.streaming.StreamResponse):
-                    data = json.dumps({
-                        "type": "token",
-                        "field": chunk.signature_field_name,
-                        "content": chunk.chunk,
-                    })
+                    data = json.dumps(
+                        {
+                            "type": "token",
+                            "field": chunk.signature_field_name,
+                            "content": chunk.chunk,
+                        }
+                    )
                     yield f"data: {data}\n\n"
                 elif isinstance(chunk, dspy.Prediction):
                     latency = time.time() - start
-                    usage = (
-                        chunk.get_lm_usage()
-                        if settings.TRACK_USAGE
-                        else {}
-                    )
+                    usage = chunk.get_lm_usage() if settings.TRACK_USAGE else {}
                     metrics.record_request(latency, usage)
-                    data = json.dumps({
-                        "type": "complete",
-                        "answer": chunk.answer,
-                        "usage": usage,
-                        "latency_seconds": round(latency, 3),
-                    })
+                    data = json.dumps(
+                        {
+                            "type": "complete",
+                            "answer": chunk.answer,
+                            "usage": usage,
+                            "latency_seconds": round(latency, 3),
+                        }
+                    )
                     yield f"data: {data}\n\n"
         except Exception as e:
             metrics.record_error()
@@ -360,10 +342,12 @@ async def batch_predict(questions: list[PredictRequest]):
 # Section 8: Optimization Script
 # =====================================================
 
+
 def run_optimization():
     """Run MIPROv2 optimization and save state."""
     dspy.configure(
-        lm=dspy.LM(settings.MODEL), track_usage=True,
+        lm=dspy.LM(settings.MODEL),
+        track_usage=True,
     )
 
     program = QAProgram()
@@ -405,10 +389,7 @@ def run_optimization():
 
     def metric(example, prediction, trace=None):
         length_ok = len(prediction.answer) > 50
-        has_concepts = (
-            hasattr(prediction, "key_concepts")
-            and len(prediction.key_concepts) > 10
-        )
+        has_concepts = hasattr(prediction, "key_concepts") and len(prediction.key_concepts) > 10
         return length_ok and has_concepts
 
     optimizer = dspy.MIPROv2(metric=metric, auto="light")
@@ -423,6 +404,7 @@ def run_optimization():
 # =====================================================
 # Section 9: Test Script
 # =====================================================
+
 
 async def run_tests():
     """Test all API endpoints."""
@@ -476,9 +458,7 @@ async def run_tests():
                     if chunk["type"] == "token":
                         print(chunk["content"], end="", flush=True)
                     elif chunk["type"] == "complete":
-                        print(
-                            f"\nComplete: latency={chunk['latency_seconds']}s"
-                        )
+                        print(f"\nComplete: latency={chunk['latency_seconds']}s")
 
         # Metrics
         r = await client.get(f"{base}/metrics")
@@ -488,6 +468,7 @@ async def run_tests():
 # =====================================================
 # Section 10: Load Test
 # =====================================================
+
 
 async def run_load_test(concurrent=5, total=20):
     """Basic load test."""
@@ -533,10 +514,7 @@ async def run_load_test(concurrent=5, total=20):
     print(f"Requests: {total} ({errors} errors)")
     print(f"Throughput: {total / total_time:.1f} req/s")
     print(f"Avg latency: {sum(latencies) / len(latencies):.2f}s")
-    print(
-        f"P95 latency: "
-        f"{sorted(latencies)[int(len(latencies) * 0.95)]:.2f}s"
-    )
+    print(f"P95 latency: {sorted(latencies)[int(len(latencies) * 0.95)]:.2f}s")
     print(f"Max latency: {max(latencies):.2f}s")
 
 

@@ -20,17 +20,14 @@ load_dotenv()
 # Pattern 1: PAPILLON - Privacy-Preserving Delegation
 # =====================================================
 
+
 class PAPILLON(dspy.Module):
     """Privacy-preserving delegation: local model redacts,
     external model answers."""
 
     def __init__(self):
-        self.craft = dspy.ChainOfThought(
-            "context, question -> redacted_request"
-        )
-        self.respond = dspy.Predict(
-            "redacted_request -> response"
-        )
+        self.craft = dspy.ChainOfThought("context, question -> redacted_request")
+        self.respond = dspy.Predict("redacted_request -> response")
 
     def forward(self, context, question):
         redacted = self.craft(context=context, question=question)
@@ -57,12 +54,8 @@ def evaluate_privacy_leakage(redacted_request, private_entities):
 
 def papillon_metric(example, prediction, trace=None):
     """Composite metric balancing quality and privacy."""
-    quality = evaluate_answer_quality(
-        prediction.response, example.gold_answer
-    )
-    leakage = evaluate_privacy_leakage(
-        prediction.redacted_request, example.private_entities
-    )
+    quality = evaluate_answer_quality(prediction.response, example.gold_answer)
+    leakage = evaluate_privacy_leakage(prediction.redacted_request, example.private_entities)
     score = (quality + (1.0 - leakage)) / 2.0
     return score
 
@@ -71,22 +64,21 @@ def papillon_metric(example, prediction, trace=None):
 # Pattern 2: Multi-Hop Research Agent
 # =====================================================
 
+
 class ResearchHop(dspy.Module):
     """A single hop: generate a search query and take notes."""
 
     def __init__(self):
-        self.generate_query = dspy.ChainOfThought(
-            "claim, notes -> search_query"
-        )
-        self.append_notes = dspy.ChainOfThought(
-            "claim, notes, passages -> updated_notes"
-        )
+        self.generate_query = dspy.ChainOfThought("claim, notes -> search_query")
+        self.append_notes = dspy.ChainOfThought("claim, notes, passages -> updated_notes")
 
     def forward(self, claim, notes, retriever):
         query_result = self.generate_query(claim=claim, notes=notes)
         passages = retriever(query_result.search_query)
         notes_result = self.append_notes(
-            claim=claim, notes=notes, passages=passages,
+            claim=claim,
+            notes=notes,
+            passages=passages,
         )
         return notes_result.updated_notes
 
@@ -109,6 +101,7 @@ class MultiHopResearcher(dspy.Module):
 # =====================================================
 # RL Training Setup (common to both patterns)
 # =====================================================
+
 
 def setup_rl_training(metric, num_train_steps=150, checkpoint="checkpoints/rl_model"):
     """Configure ArborGRPO for RL training."""
