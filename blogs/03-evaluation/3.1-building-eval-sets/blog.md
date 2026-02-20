@@ -302,8 +302,8 @@ You have data. Now you need to define *what "good" looks like.* In the next post
 
 ## Resources
 
-- 📖 [DSPy Data Documentation](https://dspy.ai/learn/evaluation/data/)
-- 📖 [DSPy Evaluation Overview](https://dspy.ai/learn/evaluation/overview/)
-- 📖 [HuggingFace Datasets Library](https://huggingface.co/docs/datasets/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📁 [Code examples for this post](code/)
+- [DSPy Data Documentation](https://dspy.ai/learn/evaluation/data/)
+- [DSPy Evaluation Overview](https://dspy.ai/learn/evaluation/overview/)
+- [HuggingFace Datasets Library](https://huggingface.co/docs/datasets/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

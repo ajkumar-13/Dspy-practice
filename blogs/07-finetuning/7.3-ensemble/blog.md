@@ -219,8 +219,8 @@ You've now learned all three pillars of Phase 7: distillation with BootstrapFine
 
 ## Resources
 
-- 📖 [Ensemble API Reference](https://dspy.ai/api/optimizers/Ensemble/)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Ensemble API Reference](https://dspy.ai/api/optimizers/Ensemble/)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
 
 ---

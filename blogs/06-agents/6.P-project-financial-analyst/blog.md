@@ -386,9 +386,9 @@ You've completed Phase 6. You can now build, optimize, and evaluate agents with 
 
 ## Resources
 
-- 📖 [DSPy Yahoo Finance Agent Tutorial](https://dspy.ai/tutorials/yahoo_finance_react/)
-- 📖 [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
-- 📖 [DSPy ReAct API Reference](https://dspy.ai/api/modules/ReAct/)
-- 📖 [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [SemanticF1 Metric](https://dspy.ai/api/metrics/SemanticF1/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Yahoo Finance Agent Tutorial](https://dspy.ai/tutorials/yahoo_finance_react/)
+- [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
+- [DSPy ReAct API Reference](https://dspy.ai/api/modules/ReAct/)
+- [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
+- [SemanticF1 Metric](https://dspy.ai/api/metrics/SemanticF1/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

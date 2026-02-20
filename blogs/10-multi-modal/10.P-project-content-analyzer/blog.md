@@ -36,15 +36,15 @@ The system follows a four-stage pipeline:
 ```
 Input (Image + Text)
     │
-    ├──► ImageAnalyzer ──► visual analysis (objects, scene, style, colors)
+    ├──> ImageAnalyzer ──> visual analysis (objects, scene, style, colors)
     │
-    ├──► TextAnalyzer ──► text analysis (themes, entities, intent)
+    ├──> TextAnalyzer ──> text analysis (themes, entities, intent)
     │
-    └──► ContentSynthesizer ◄── (receives both analyses)
+    └──> ContentSynthesizer <── (receives both analyses)
               │
-              └──► SentimentAnalyzer ──► final sentiment/tone
+              └──> SentimentAnalyzer ──> final sentiment/tone
                         │
-                        └──► Structured Content Report
+                        └──> Structured Content Report
 ```
 
 Each component is a `dspy.Module` with its own signature. The pipeline module orchestrates them and returns a comprehensive `dspy.Prediction`.

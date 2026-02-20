@@ -271,7 +271,7 @@ BootstrapRS optimizes *demonstrations*, but what about the **instructions** them
 
 ## Resources
 
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 📖 [BootstrapFewShot Docs](https://dspy.ai/api/optimizers/BootstrapFewShot/)
-- 📖 [BootstrapFewShotWithRandomSearch Docs](https://dspy.ai/api/optimizers/BootstrapFewShotWithRandomSearch/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [BootstrapFewShot Docs](https://dspy.ai/api/optimizers/BootstrapFewShot/)
+- [BootstrapFewShotWithRandomSearch Docs](https://dspy.ai/api/optimizers/BootstrapFewShotWithRandomSearch/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

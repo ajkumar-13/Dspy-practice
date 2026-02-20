@@ -198,15 +198,15 @@ Evaluation isn't a one-time event. It's a continuous loop that drives improvemen
 │ 1. Evaluate │ ← Run dspy.Evaluate with your metric
 └──────┬──────┘
        │
-┌──────▼──────────┐
+┌──────v──────────┐
 │ 2. Diagnose     │ ← Inspect failures, find patterns
 └──────┬──────────┘
        │
-┌──────▼──────────┐
+┌──────v──────────┐
 │ 3. Improve      │ ← Change signature, module, or metric
 └──────┬──────────┘
        │
-┌──────▼──────────┐
+┌──────v──────────┐
 │ 4. Re-evaluate  │ ← Confirm improvement, repeat
 └──────┬──────────┘
        │
@@ -273,8 +273,8 @@ You've mastered the evaluation workflow. Now let's put it all together in a hand
 
 ## Resources
 
-- 📖 [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
-- 📖 [DSPy Metrics Reference](https://dspy.ai/learn/evaluation/metrics/)
-- 📖 [MLflow DSPy Integration](https://mlflow.org/docs/latest/llms/dspy/index.html)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📁 [Code examples for this post](code/)
+- [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
+- [DSPy Metrics Reference](https://dspy.ai/learn/evaluation/metrics/)
+- [MLflow DSPy Integration](https://mlflow.org/docs/latest/llms/dspy/index.html)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

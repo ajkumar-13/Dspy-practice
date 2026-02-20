@@ -261,8 +261,8 @@ Some tasks require routing between different models, sending sensitive data to a
 
 ## Resources
 
-- 📖 [DSPy Conversation History Tutorial](https://dspy.ai/tutorials/conversation_history/)
-- 📖 [Mem0 ReAct Agent Tutorial](https://dspy.ai/tutorials/mem0_react_agent/)
-- 📖 [DSPy History API Reference](https://dspy.ai/api/types/History/)
-- 📖 [Building Customer Service Agents](https://dspy.ai/tutorials/customer_service_agent/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Conversation History Tutorial](https://dspy.ai/tutorials/conversation_history/)
+- [Mem0 ReAct Agent Tutorial](https://dspy.ai/tutorials/mem0_react_agent/)
+- [DSPy History API Reference](https://dspy.ai/api/types/History/)
+- [Building Customer Service Agents](https://dspy.ai/tutorials/customer_service_agent/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

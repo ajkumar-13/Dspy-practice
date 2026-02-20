@@ -168,12 +168,12 @@ print(f"Summary: {result.summary}")
 
 | Scenario | Route to Local | Route to Cloud |
 |---|---|---|
-| PII/PHI extraction | ✅ | ❌ |
-| Code with trade secrets | ✅ | ❌ |
-| General summarization | ❌ | ✅ |
-| Creative writing | ❌ | ✅ |
-| Financial record parsing | ✅ | ❌ |
-| Translation of public content | ❌ | ✅ |
+| PII/PHI extraction | Yes | No |
+| Code with trade secrets | Yes | No |
+| General summarization | No | Yes |
+| Creative writing | No | Yes |
+| Financial record parsing | Yes | No |
+| Translation of public content | No | Yes |
 
 The Papillon pattern isn't limited to two models. You can route to **any number of models** based on sensitivity level, cost constraints, latency requirements, or capability needs. `dspy.context(lm=...)` makes the switching trivial.
 
@@ -199,7 +199,7 @@ You've learned every agent pattern in DSPy: ReAct, advanced tools, MCP, memory, 
 
 ## Resources
 
-- 📖 [Papillon Tutorial](https://dspy.ai/tutorials/papillon/)
-- 📖 [DSPy Context Management](https://dspy.ai/learn/programming/language_models/)
-- 📖 [Local Models with Ollama](https://dspy.ai/learn/programming/language_models/#local-models)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Papillon Tutorial](https://dspy.ai/tutorials/papillon/)
+- [DSPy Context Management](https://dspy.ai/learn/programming/language_models/)
+- [Local Models with Ollama](https://dspy.ai/learn/programming/language_models/#local-models)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

@@ -244,6 +244,6 @@ MIPROv2 searches systematically, but what if the optimizer could **reflect** on 
 
 ## Resources
 
-- 📖 [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

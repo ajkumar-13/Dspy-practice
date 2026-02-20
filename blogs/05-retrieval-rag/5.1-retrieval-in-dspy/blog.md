@@ -462,10 +462,10 @@ With retrieval wired up, it's time to build the most important LM pattern in pro
 
 ## Resources
 
-- 📖 [DSPy Embedder API](https://dspy.ai/api/models/Embedder/)
-- 📖 [DSPy Embeddings Retriever API](https://dspy.ai/api/tools/Embeddings/)
-- 📖 [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
-- 📖 [Sentence-Transformers Models](https://huggingface.co/models?library=sentence-transformers)
-- 📖 [FAISS Documentation](https://github.com/facebookresearch/faiss)
-- 📖 [ColBERTv2 Paper](https://arxiv.org/abs/2112.01488)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Embedder API](https://dspy.ai/api/models/Embedder/)
+- [DSPy Embeddings Retriever API](https://dspy.ai/api/tools/Embeddings/)
+- [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
+- [Sentence-Transformers Models](https://huggingface.co/models?library=sentence-transformers)
+- [FAISS Documentation](https://github.com/facebookresearch/faiss)
+- [ColBERTv2 Paper](https://arxiv.org/abs/2112.01488)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

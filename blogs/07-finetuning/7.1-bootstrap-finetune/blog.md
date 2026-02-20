@@ -203,7 +203,7 @@ BootstrapFinetune optimizes weights for a single model. But what if your system 
 
 ## Resources
 
-- 📖 [BootstrapFinetune API Reference](https://dspy.ai/api/optimizers/BootstrapFinetune/)
-- 📖 [Classification Fine-Tuning Tutorial](https://dspy.ai/tutorials/classification_finetuning/)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [BootstrapFinetune API Reference](https://dspy.ai/api/optimizers/BootstrapFinetune/)
+- [Classification Fine-Tuning Tutorial](https://dspy.ai/tutorials/classification_finetuning/)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

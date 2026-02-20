@@ -306,7 +306,7 @@ Now that you understand what RLM is and when to use it, it's time to build with 
 
 ## Resources
 
-- 📖 [DSPy RLM API Docs](https://dspy.ai/api/modules/RLM/)
-- 📖 [DSPy Module Documentation](https://dspy.ai/learn/programming/modules/)
-- 📖 [Deno Installation Guide](https://docs.deno.com/runtime/getting_started/installation/)
-- 📂 [Blog code samples](code/)
+- [DSPy RLM API Docs](https://dspy.ai/api/modules/RLM/)
+- [DSPy Module Documentation](https://dspy.ai/learn/programming/modules/)
+- [Deno Installation Guide](https://docs.deno.com/runtime/getting_started/installation/)
+- [Blog code samples](code/)

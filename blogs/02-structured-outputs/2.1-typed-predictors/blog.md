@@ -385,8 +385,8 @@ Typed outputs guarantee structure, but what about *semantic* constraints? What i
 
 ## Resources
 
-- 📖 [DSPy Typed Predictors Documentation](https://dspy.ai/learn/programming/signatures/)
-- 📖 [DSPy Adapters Guide](https://dspy.ai/learn/programming/language_models/#setting-up-the-lm-and-adapter)
-- 📖 [Pydantic Documentation](https://docs.pydantic.dev/latest/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📖 [Code examples for this post](code/)
+- [DSPy Typed Predictors Documentation](https://dspy.ai/learn/programming/signatures/)
+- [DSPy Adapters Guide](https://dspy.ai/learn/programming/language_models/#setting-up-the-lm-and-adapter)
+- [Pydantic Documentation](https://docs.pydantic.dev/latest/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

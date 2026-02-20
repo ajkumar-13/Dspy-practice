@@ -406,9 +406,9 @@ Now that your environment is set up and you understand the philosophy, it's time
 
 ## Resources
 
-- 📖 [DSPy Official Docs: Getting Started](https://dspy.ai/)
-- 📖 [DSPy Programming Overview](https://dspy.ai/learn/programming/overview/)
-- 📖 [Language Model Configuration](https://dspy.ai/learn/programming/language_models/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📦 [LiteLLM Supported Providers](https://docs.litellm.ai/docs/providers)
-- 📖 [uv Package Manager](https://docs.astral.sh/uv/)
+- [DSPy Official Docs: Getting Started](https://dspy.ai/)
+- [DSPy Programming Overview](https://dspy.ai/learn/programming/overview/)
+- [Language Model Configuration](https://dspy.ai/learn/programming/language_models/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [LiteLLM Supported Providers](https://docs.litellm.ai/docs/providers)
+- [uv Package Manager](https://docs.astral.sh/uv/)

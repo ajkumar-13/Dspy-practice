@@ -355,21 +355,21 @@ PAPILLON (Privacy-Aware delegation of LLM Inference to Optimize Nimble networks)
 │  User Request (contains PII/secrets) │
 └──────────────┬───────────────────────┘
                │
-       ┌───────▼──────────┐
+       ┌───────v──────────┐
        │  Small Local LM  │  ← Runs on your infrastructure
        │  (privacy-aware) │
        └───────┬──────────┘
                │  Sanitized/abstracted request
-       ┌───────▼─────────┐
+       ┌───────v─────────┐
        │  Powerful Cloud │  ← External API (GPT-4o, etc.)
        │     LM          │
        └───────┬─────────┘
                │  High-quality response
-       ┌───────▼─────────┐
+       ┌───────v─────────┐
        │  Small Local LM │  ← Re-contextualizes with private data
        └───────┬─────────┘
                │
-       ┌───────▼────────┐
+       ┌───────v────────┐
        │  Final Answer  │
        └────────────────┘
 ```

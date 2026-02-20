@@ -259,9 +259,9 @@ Time to put everything together. In the Phase 4 project, you'll build a **self-o
 
 ## Resources
 
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 📖 [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [BootstrapFewShot Docs](https://dspy.ai/api/optimizers/BootstrapFewShot/)
-- 📖 [COPRO Docs](https://dspy.ai/api/optimizers/COPRO/)
-- 📖 [GEPA Tutorial](https://dspy.ai/tutorials/gepa_ai_program/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
+- [BootstrapFewShot Docs](https://dspy.ai/api/optimizers/BootstrapFewShot/)
+- [COPRO Docs](https://dspy.ai/api/optimizers/COPRO/)
+- [GEPA Tutorial](https://dspy.ai/tutorials/gepa_ai_program/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

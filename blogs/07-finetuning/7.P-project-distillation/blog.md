@@ -358,11 +358,11 @@ In **Phase 8**, we'll explore **Recursive Language Models (RLMs)**: DSPy's `dspy
 
 ## Resources
 
-- 📖 [BootstrapFinetune API Reference](https://dspy.ai/api/optimizers/BootstrapFinetune/)
-- 📖 [Classification Fine-Tuning Tutorial](https://dspy.ai/tutorials/classification_finetuning/)
-- 📖 [BetterTogether API Reference](https://dspy.ai/api/optimizers/BetterTogether/)
-- 📖 [Ensemble API Reference](https://dspy.ai/api/optimizers/Ensemble/)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [BootstrapFinetune API Reference](https://dspy.ai/api/optimizers/BootstrapFinetune/)
+- [Classification Fine-Tuning Tutorial](https://dspy.ai/tutorials/classification_finetuning/)
+- [BetterTogether API Reference](https://dspy.ai/api/optimizers/BetterTogether/)
+- [Ensemble API Reference](https://dspy.ai/api/optimizers/Ensemble/)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
 
 ---

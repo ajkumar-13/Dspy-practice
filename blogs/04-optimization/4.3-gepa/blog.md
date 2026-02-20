@@ -181,8 +181,8 @@ You've now learned three different optimizers: BootstrapRS, MIPROv2, and GEPA. B
 
 ## Resources
 
-- 📖 [GEPA Overview](https://dspy.ai/tutorials/gepa_ai_program/)
-- 📖 [GEPA for AIME](https://dspy.ai/tutorials/gepa_aime/)
-- 📄 [GEPA Paper](https://arxiv.org/abs/2507.19457)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [GEPA Overview](https://dspy.ai/tutorials/gepa_ai_program/)
+- [GEPA for AIME](https://dspy.ai/tutorials/gepa_aime/)
+- [GEPA Paper](https://arxiv.org/abs/2507.19457)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

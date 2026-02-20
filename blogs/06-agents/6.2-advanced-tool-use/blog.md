@@ -243,8 +243,8 @@ Tools don't have to live in your codebase. The **Model Context Protocol (MCP)** 
 
 ## Resources
 
-- 📖 [DSPy Tool Use Guide](https://dspy.ai/tutorials/agents/)
-- 📖 [DSPy Agents API Reference](https://dspy.ai/api/modules/ReAct/)
-- 📖 [DSPy Tool Class](https://dspy.ai/api/tools/Tool/)
-- 📖 [Native Function Calling](https://dspy.ai/learn/programming/language_models/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Tool Use Guide](https://dspy.ai/tutorials/agents/)
+- [DSPy Agents API Reference](https://dspy.ai/api/modules/ReAct/)
+- [DSPy Tool Class](https://dspy.ai/api/tools/Tool/)
+- [Native Function Calling](https://dspy.ai/learn/programming/language_models/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

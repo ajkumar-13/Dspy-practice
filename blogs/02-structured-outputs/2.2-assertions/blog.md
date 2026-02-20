@@ -325,7 +325,7 @@ Assertions retry when constraints fail, but what if you want to *systematically*
 
 ## Resources
 
-- 📖 [DSPy Output Refinement (Replaces Assertions)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
-- 📖 [DSPy Programming Overview](https://dspy.ai/learn/programming/overview/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📖 [Code examples for this post](code/)
+- [DSPy Output Refinement (Replaces Assertions)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
+- [DSPy Programming Overview](https://dspy.ai/learn/programming/overview/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

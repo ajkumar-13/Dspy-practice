@@ -359,7 +359,7 @@ You've got data and metrics. Now it's time to put them together and systematical
 
 ## Resources
 
-- 📖 [DSPy Metrics Documentation](https://dspy.ai/learn/evaluation/metrics/)
-- 📖 [DSPy Evaluation Overview](https://dspy.ai/learn/evaluation/overview/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📁 [Code examples for this post](code/)
+- [DSPy Metrics Documentation](https://dspy.ai/learn/evaluation/metrics/)
+- [DSPy Evaluation Overview](https://dspy.ai/learn/evaluation/overview/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

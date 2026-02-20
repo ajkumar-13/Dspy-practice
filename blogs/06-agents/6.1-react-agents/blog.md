@@ -282,9 +282,9 @@ You've built your first agent with `dspy.ReAct`. But ReAct isn't the only way to
 
 ## Resources
 
-- 📖 [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
-- 📖 [DSPy ReAct API Reference](https://dspy.ai/api/modules/ReAct/)
-- 📖 [Building Customer Service Agents](https://dspy.ai/tutorials/customer_service_agent/)
-- 📖 [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [ReAct Paper (Yao et al., 2022)](https://arxiv.org/abs/2210.03629)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
+- [DSPy ReAct API Reference](https://dspy.ai/api/modules/ReAct/)
+- [Building Customer Service Agents](https://dspy.ai/tutorials/customer_service_agent/)
+- [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
+- [ReAct Paper (Yao et al., 2022)](https://arxiv.org/abs/2210.03629)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

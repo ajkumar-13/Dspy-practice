@@ -328,8 +328,8 @@ Basic RAG handles single-step questions well, but what about questions that requ
 
 ## Resources
 
-- 📖 [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
-- 📖 [SemanticF1 Documentation](https://dspy.ai/api/metrics/SemanticF1/)
-- 📖 [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [DSPy Retrieval Overview](https://dspy.ai/learn/retrieval_models_clients/overview/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
+- [SemanticF1 Documentation](https://dspy.ai/api/metrics/SemanticF1/)
+- [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
+- [DSPy Retrieval Overview](https://dspy.ai/learn/retrieval_models_clients/overview/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

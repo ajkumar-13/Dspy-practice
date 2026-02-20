@@ -269,8 +269,8 @@ You've mastered DSPy optimization! In Phase 5, we'll dive deep into **retrieval*
 
 ## Resources
 
-- 📖 [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
-- 📖 [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [DSPy Evaluate Docs](https://dspy.ai/api/evaluation/Evaluate/)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
+- [MIPROv2 Docs](https://dspy.ai/api/optimizers/MIPROv2/)
+- [DSPy Evaluate Docs](https://dspy.ai/api/evaluation/Evaluate/)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

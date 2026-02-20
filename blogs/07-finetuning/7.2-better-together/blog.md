@@ -182,9 +182,9 @@ You've seen how to optimize a single program and how to jointly optimize prompts
 
 ## Resources
 
-- 📖 [BetterTogether API Reference](https://dspy.ai/api/optimizers/BetterTogether/)
-- 📄 [BetterTogether Paper (arXiv:2407.10930)](https://arxiv.org/abs/2407.10930)
-- 📖 [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [BetterTogether API Reference](https://dspy.ai/api/optimizers/BetterTogether/)
+- [BetterTogether Paper (arXiv:2407.10930)](https://arxiv.org/abs/2407.10930)
+- [DSPy Optimizers Overview](https://dspy.ai/learn/optimization/optimizers/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
 
 ---

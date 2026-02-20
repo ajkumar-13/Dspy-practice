@@ -391,9 +391,9 @@ You've mastered retrieval and RAG. In Phase 6, we will go beyond retrieval tools
 
 ## Resources
 
-- 📖 [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
-- 📖 [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
-- 📖 [DSPy ReAct Documentation](https://dspy.ai/api/modules/ReAct/)
-- 📖 [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
-- 📖 [SemanticF1 Metric](https://dspy.ai/api/metrics/SemanticF1/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
+- [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
+- [DSPy ReAct Documentation](https://dspy.ai/api/modules/ReAct/)
+- [MIPROv2 Optimizer](https://dspy.ai/api/optimizers/MIPROv2/)
+- [SemanticF1 Metric](https://dspy.ai/api/metrics/SemanticF1/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

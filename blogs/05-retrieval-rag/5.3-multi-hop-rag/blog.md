@@ -276,7 +276,7 @@ Multi-hop RAG uses a fixed number of hops. But what if the model could *decide* 
 
 ## Resources
 
-- 📖 [DSPy Multi-Hop Search Tutorial](https://dspy.ai/tutorials/multihop_search/)
-- 📖 [HotPotQA Dataset](https://hotpotqa.github.io/)
-- 📖 [DSPy Assertions Guide](https://dspy.ai/learn/programming/assertions/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy Multi-Hop Search Tutorial](https://dspy.ai/tutorials/multihop_search/)
+- [HotPotQA Dataset](https://hotpotqa.github.io/)
+- [DSPy Assertions Guide](https://dspy.ai/learn/programming/assertions/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

@@ -450,8 +450,8 @@ Phase 3 is complete. You can build datasets, define metrics, run evaluations, an
 
 ## Resources
 
-- 📖 [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
-- 📖 [DSPy Metrics Reference](https://dspy.ai/learn/evaluation/metrics/)
-- 📖 [HotPotQA Dataset](https://hotpotqa.github.io/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📁 [Code examples for this post](code/)
+- [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
+- [DSPy Metrics Reference](https://dspy.ai/learn/evaluation/metrics/)
+- [HotPotQA Dataset](https://hotpotqa.github.io/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

@@ -294,8 +294,8 @@ You've now learned four retrieval patterns: local embeddings, single-hop RAG, mu
 
 ## Resources
 
-- 📖 [DSPy ReAct Documentation](https://dspy.ai/api/modules/ReAct/)
-- 📖 [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
-- 📖 [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
-- 📖 [ReAct Paper (Yao et al.)](https://arxiv.org/abs/2210.03629)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy ReAct Documentation](https://dspy.ai/api/modules/ReAct/)
+- [DSPy RAG Tutorial](https://dspy.ai/tutorials/rag/)
+- [DSPy Agents Tutorial](https://dspy.ai/tutorials/agents/)
+- [ReAct Paper (Yao et al.)](https://arxiv.org/abs/2210.03629)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

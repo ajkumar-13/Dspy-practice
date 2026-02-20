@@ -230,8 +230,8 @@ Agents are powerful, but they're stateless by default. Each call starts from scr
 
 ## Resources
 
-- 📖 [DSPy MCP Integration](https://dspy.ai/tutorials/mcp/)
-- 📖 [Model Context Protocol Specification](https://modelcontextprotocol.io/)
-- 📖 [MCP Server Registry](https://github.com/modelcontextprotocol/servers)
-- 📖 [DSPy Tool API Reference](https://dspy.ai/api/tools/Tool/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [DSPy MCP Integration](https://dspy.ai/tutorials/mcp/)
+- [Model Context Protocol Specification](https://modelcontextprotocol.io/)
+- [MCP Server Registry](https://github.com/modelcontextprotocol/servers)
+- [DSPy Tool API Reference](https://dspy.ai/api/tools/Tool/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)

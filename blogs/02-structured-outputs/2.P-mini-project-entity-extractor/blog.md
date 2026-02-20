@@ -419,9 +419,9 @@ Phase 2 is complete. You can extract structured data, enforce constraints, refin
 
 ## Resources
 
-- 📖 [DSPy Typed Predictors Documentation](https://dspy.ai/learn/programming/signatures/)
-- 📖 [DSPy Output Refinement (Replaces Assertions)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
-- 📖 [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
-- 📖 [Pydantic Documentation](https://docs.pydantic.dev/latest/)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📖 [Code examples for this post](code/)
+- [DSPy Typed Predictors Documentation](https://dspy.ai/learn/programming/signatures/)
+- [DSPy Output Refinement (Replaces Assertions)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
+- [DSPy Evaluation Documentation](https://dspy.ai/learn/evaluation/overview/)
+- [Pydantic Documentation](https://docs.pydantic.dev/latest/)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)

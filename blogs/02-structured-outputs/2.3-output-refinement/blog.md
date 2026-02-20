@@ -342,7 +342,7 @@ You've now mastered the full Phase 2 toolkit: typed predictors for structure, as
 
 ## Resources
 
-- 📖 [DSPy Output Refinement Tutorial](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
-- 📖 [DSPy Assertions (Deprecated, see BestOfN/Refine)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/#migration-from-dspysuggest-and-dspyassert)
-- 💻 [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
-- 📖 [Code examples for this post](code/)
+- [DSPy Output Refinement Tutorial](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/)
+- [DSPy Assertions (Deprecated, see BestOfN/Refine)](https://dspy.ai/tutorials/output_refinement/best-of-n-and-refine/#migration-from-dspysuggest-and-dspyassert)
+- [DSPy GitHub Repository](https://github.com/stanfordnlp/dspy)
+- [Code examples for this post](code/)
