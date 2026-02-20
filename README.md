@@ -1,4 +1,4 @@
-# 🚀 DSPy Mastery: Zero to Pro
+# DSPy Mastery: Zero to Pro
 
 **A comprehensive blog series covering DSPy from your first `dspy.Predict` to production-grade, self-optimizing AI systems.**
 
@@ -163,9 +163,9 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 
 | # | Blog | Description |
 |---|------|-------------|
-| 12.1 | [Real-World Architectures](blogs/12-advanced/12.1-real-world-architectures/blog.md) | STORM, IReRa, Haize Red-Teaming |
-| 12.2 | [Application Tutorials](blogs/12-advanced/12.2-real-world-applications/blog.md) | llms.txt, email extraction, code gen, games |
-| 12.3 | [Research Papers](blogs/12-advanced/12.3-research-papers/blog.md) | Guided reading of key DSPy papers |
+| 12.1 | [Real-World Architectures](blogs/12-advanced/12.1-real-world-architectures/blog.md) | Pipelines, agent orchestration, optimization cascades, EDD, PAPILLON |
+| 12.2 | [Real-World Applications](blogs/12-advanced/12.2-real-world-applications/blog.md) | Customer service, content gen, data extraction, research, code gen, education |
+| 12.3 | [Research Papers](blogs/12-advanced/12.3-research-papers/blog.md) | Core DSPy paper, MIPROv2, ColBERTv2, SIMBA, GEPA, PAPILLON, Arbor |
 | 12.4 | [Contributing](blogs/12-advanced/12.4-contributing/blog.md) | Contributing to the DSPy project |
 
 ## 📁 Project Structure
@@ -294,7 +294,7 @@ ollama pull llama3.2
 
 ## 💡 Key Insight
 
-> **Don't skip Phases 3–4 (Evaluation & Optimization).** Most people jump straight to building agents. But DSPy's superpower is *systematic optimization*,  without a good metric and eval set, you're just writing regular code with extra steps.
+> **Don't skip Phases 3-4 (Evaluation & Optimization).** Most people jump straight to building agents. But DSPy's superpower is *systematic optimization* - without a good metric and eval set, you're just writing regular code with extra steps.
 
 ## 📚 Resources
 
