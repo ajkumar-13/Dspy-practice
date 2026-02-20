@@ -5,13 +5,13 @@ Requires: Multiple GPUs (4xH100 recommended)
 EXPERIMENTAL: proof of concept, not production-ready
 """
 
-import arbor
+import arbor  # type: ignore[import-not-found]
 import dspy
-from arbor import ArborProvider
+from arbor import ArborProvider  # type: ignore[import-not-found]
 from dotenv import load_dotenv
 from dspy.evaluate import SemanticF1
-from dspy.teleprompt import ArborGRPO
-from peft import LoraConfig
+from dspy.teleprompt import ArborGRPO  # type: ignore[attr-defined]
+from peft import LoraConfig  # type: ignore[import-not-found]
 
 load_dotenv()
 
