@@ -5,12 +5,12 @@ Requires: Multiple GPUs (4xH100 recommended)
 EXPERIMENTAL: proof of concept, not production-ready
 """
 
-import dspy
 import arbor
+import dspy
 from arbor import ArborProvider
-from peft import LoraConfig
-from dspy.teleprompt import ArborGRPO
 from dotenv import load_dotenv
+from dspy.teleprompt import ArborGRPO
+from peft import LoraConfig
 
 load_dotenv()
 
@@ -38,6 +38,20 @@ class PAPILLON(dspy.Module):
             redacted_request=redacted.redacted_request,
             response=result.response,
         )
+
+
+def evaluate_answer_quality(response, gold_answer):
+    """Evaluate answer quality using semantic similarity."""
+    scorer = dspy.evaluate.SemanticF1()
+    ex = dspy.Example(answer=gold_answer).with_inputs("answer")
+    pred = dspy.Prediction(answer=response)
+    return scorer(ex, pred)
+
+
+def evaluate_privacy_leakage(redacted_request, private_entities):
+    """Check if private entities leak into the redacted request."""
+    leaked = sum(1 for e in private_entities if e.lower() in redacted_request.lower())
+    return leaked / max(len(private_entities), 1)
 
 
 def papillon_metric(example, prediction, trace=None):

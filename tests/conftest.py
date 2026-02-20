@@ -4,8 +4,8 @@ conftest.py - Shared fixtures for DSPy blog tests.
 These tests validate code patterns WITHOUT calling any LLM API.
 """
 
-import pytest
 import dspy
+import pytest
 
 
 @pytest.fixture

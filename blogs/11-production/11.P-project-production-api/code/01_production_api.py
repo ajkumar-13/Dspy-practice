@@ -15,8 +15,8 @@ import time
 from contextlib import asynccontextmanager
 
 import dspy
-from dspy.streaming import StreamListener
 from dotenv import load_dotenv
+from dspy.streaming import StreamListener
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
@@ -528,7 +528,7 @@ async def run_load_test(concurrent=5, total=20):
     latencies = [r["latency"] for r in results]
     errors = sum(1 for r in results if r["status"] != 200)
 
-    print(f"\n--- Load Test Results ---")
+    print("\n--- Load Test Results ---")
     print(f"Total time: {total_time:.1f}s")
     print(f"Requests: {total} ({errors} errors)")
     print(f"Throughput: {total / total_time:.1f} req/s")

@@ -8,8 +8,8 @@ a student (GPT-4o-mini).
 """
 
 import dspy
-from dspy.evaluate import Evaluate
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
 
 load_dotenv()
 

@@ -3,13 +3,14 @@ Blog 3.P: Mini-Project: Building an Evaluation Harness
 A reusable template for evaluating multiple DSPy programs across multiple metrics.
 """
 
-import dspy
 import json
 import time
 from datetime import datetime
-from dotenv import load_dotenv
+
+import dspy
 from datasets import load_dataset
-from dspy.evaluate import answer_exact_match, answer_passage_match, SemanticF1
+from dotenv import load_dotenv
+from dspy.evaluate import SemanticF1, answer_exact_match, answer_passage_match
 
 load_dotenv()
 

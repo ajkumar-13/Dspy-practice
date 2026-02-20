@@ -7,6 +7,7 @@ Requires: OpenAI API key
 import json
 import logging
 import time
+
 import dspy
 from dotenv import load_dotenv
 

@@ -44,19 +44,19 @@ class MultiHopRAG(dspy.Module):
 
     def forward(self, question):
         context = []
-        
+
         for hop in range(self.max_hops):
             # Generate query based on what we know so far
             query_result = self.generate_query(context=context, question=question)
             query = query_result.query
-            
+
             # Search
             passages = search(query)
-            
+
             # Deduplicate and add to context
             new_passages = [p for p in passages if p not in context]
             context.extend(new_passages)
-            
+
             print(f"Hop {hop+1} Query: {query}")
             print(f"Hop {hop+1} Found: {new_passages}")
 

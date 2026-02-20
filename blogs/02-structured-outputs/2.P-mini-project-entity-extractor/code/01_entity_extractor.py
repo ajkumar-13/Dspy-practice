@@ -3,10 +3,11 @@ Phase 2 Mini-Project: Structured Entity Extractor
 Extract structured data from legal documents with validation.
 """
 
+from typing import Literal
+
 import dspy
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-from typing import Literal
 
 load_dotenv()
 

@@ -5,13 +5,13 @@ Requires: Multiple GPUs (4xH100 recommended)
 EXPERIMENTAL: proof of concept, not production-ready
 """
 
-import dspy
 import arbor
+import dspy
 from arbor import ArborProvider
-from peft import LoraConfig
-from dspy.teleprompt import ArborGRPO
-from dspy.evaluate import Evaluate
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
+from dspy.teleprompt import ArborGRPO
+from peft import LoraConfig
 
 load_dotenv()
 

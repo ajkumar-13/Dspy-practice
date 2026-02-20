@@ -11,10 +11,11 @@ End-to-end project demonstrating the complete DSPy distillation workflow:
 6. Compare cost, latency, and quality
 """
 
-import dspy
 import time
-from dspy.evaluate import Evaluate
+
+import dspy
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
 
 load_dotenv()
 

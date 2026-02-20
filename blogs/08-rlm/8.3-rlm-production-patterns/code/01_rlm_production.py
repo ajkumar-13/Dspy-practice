@@ -5,13 +5,12 @@ Production-grade patterns for recursive language model processing:
 chunking, error handling, memory efficiency, and monitoring.
 """
 
-import dspy
-import re
-import json
-import time
 import logging
+import re
+import time
 from dataclasses import dataclass, field
-from pathlib import Path
+
+import dspy
 
 logger = logging.getLogger(__name__)
 
@@ -95,7 +94,7 @@ class RLMMetrics:
         return remaining * self.avg_chunk_time
 
     def report(self):
-        print(f"\n--- RLM Processing Report ---")
+        print("\n--- RLM Processing Report ---")
         print(
             f"Chunks: {self.processed_chunks}/{self.total_chunks} "
             f"({self.failed_chunks} failed)"

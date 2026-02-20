@@ -5,7 +5,6 @@ Run: python 01_mcp_integration.py
 Requires: uv add "dspy[mcp]" python-dotenv
 """
 
-import asyncio
 import dspy
 from dotenv import load_dotenv
 from mcp import ClientSession

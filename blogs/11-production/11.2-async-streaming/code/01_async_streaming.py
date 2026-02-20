@@ -5,9 +5,10 @@ Requires: OpenAI API key
 """
 
 import asyncio
+
 import dspy
-from dspy.streaming import StreamListener, StatusMessageProvider
 from dotenv import load_dotenv
+from dspy.streaming import StatusMessageProvider, StreamListener
 
 load_dotenv()
 
@@ -84,7 +85,7 @@ async def demo_basic_streaming():
         if isinstance(chunk, dspy.streaming.StreamResponse):
             print(chunk.chunk, end="", flush=True)
         elif isinstance(chunk, dspy.Prediction):
-            print(f"\n\n--- Final answer ---")
+            print("\n\n--- Final answer ---")
             print(chunk.answer[:100] + "...")
 
 
@@ -180,7 +181,7 @@ async def demo_complete_pipeline():
         elif isinstance(chunk, dspy.streaming.StreamResponse):
             print(chunk.chunk, end="", flush=True)
         elif isinstance(chunk, dspy.Prediction):
-            print(f"\n\nDone!")
+            print("\n\nDone!")
 
 
 # =====================================================

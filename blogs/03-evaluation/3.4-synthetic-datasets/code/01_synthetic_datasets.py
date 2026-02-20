@@ -5,10 +5,11 @@ Generate, filter, and curate training data for DSPy optimization
 using a strong teacher LM.
 """
 
-import dspy
 import json
 import random
 from collections import Counter
+
+import dspy
 from pydantic import BaseModel, Field, ValidationError
 
 # ---------------------------------------------------------------------------

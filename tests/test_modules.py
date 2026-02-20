@@ -7,7 +7,6 @@ sub-predictors without calling any LLM.
 
 import dspy
 
-
 # ── Module definitions (from blogs 1.3, 1.4) ─────────────────────────
 
 

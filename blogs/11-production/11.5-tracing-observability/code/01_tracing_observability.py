@@ -4,8 +4,9 @@
 Instrument DSPy applications with production-grade observability.
 """
 
-import dspy
 import time
+
+import dspy
 
 # ---------------------------------------------------------------------------
 # Option 1: Langfuse Integration
@@ -14,6 +15,7 @@ import time
 def langfuse_example():
     """Demonstrate Langfuse tracing for DSPy."""
     import os
+
     from langfuse import Langfuse
 
     os.environ["LANGFUSE_PUBLIC_KEY"] = "pk-..."
@@ -71,9 +73,9 @@ def phoenix_example():
     """Demonstrate Arize Phoenix local tracing for DSPy."""
     import phoenix as px
     from opentelemetry import trace
+    from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
     from opentelemetry.sdk.trace import TracerProvider
     from opentelemetry.sdk.trace.export import SimpleSpanProcessor
-    from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 
     # Launch Phoenix dashboard
     session = px.launch_app()
@@ -115,7 +117,7 @@ class InstrumentedModule:
     """Wrapper that adds OpenTelemetry tracing to any DSPy module."""
 
     def __init__(self, module, name=None):
-        from opentelemetry import trace, metrics
+        from opentelemetry import metrics, trace
 
         self.module = module
         self.name = name or module.__class__.__name__

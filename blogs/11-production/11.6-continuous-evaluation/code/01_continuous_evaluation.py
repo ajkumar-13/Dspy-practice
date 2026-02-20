@@ -4,11 +4,12 @@
 Build a pytest-compatible evaluation suite that gates PRs on quality metrics.
 """
 
-import dspy
 import json
 import random
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import dspy
 from dspy.evaluate import Evaluate
 
 # ---------------------------------------------------------------------------
@@ -99,7 +100,9 @@ def run_eval(sample_size=50):
 
     qa = dspy.ChainOfThought("question -> answer")
 
-    metric = lambda ex, pred, trace=None: dspy.evaluate.SemanticF1()(ex, pred, trace)
+    def metric(ex, pred, trace=None):
+        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+
     evaluator = Evaluate(devset=sample, metric=metric, num_threads=4, display_progress=True)
 
     score = evaluator(qa)
@@ -117,7 +120,7 @@ def run_eval(sample_size=50):
     regression = baseline_score - score
 
     print(f"\n{'='*50}")
-    print(f"Evaluation Results")
+    print("Evaluation Results")
     print(f"{'='*50}")
     print(f"SemanticF1:        {score:.1f}%")
     print(f"Baseline:          {baseline_score:.1f}%")

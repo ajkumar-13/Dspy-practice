@@ -216,8 +216,8 @@ if __name__ == "__main__":
     if args.mode in ("rl", "compare"):
         import arbor
         from arbor import ArborProvider
-        from peft import LoraConfig
         from dspy.teleprompt import ArborGRPO
+        from peft import LoraConfig
 
         arbor.init()
         model_name = "Qwen/Qwen2.5-1.5B-Instruct"

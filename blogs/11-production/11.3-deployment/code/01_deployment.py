@@ -19,8 +19,8 @@ import time
 from contextlib import asynccontextmanager
 
 import dspy
-from dspy.streaming import StreamListener
 from dotenv import load_dotenv
+from dspy.streaming import StreamListener
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse

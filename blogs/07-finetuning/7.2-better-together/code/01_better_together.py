@@ -8,8 +8,8 @@ to co-adapt modules running on different sized models.
 """
 
 import dspy
-from dspy.evaluate import Evaluate
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
 
 load_dotenv()
 

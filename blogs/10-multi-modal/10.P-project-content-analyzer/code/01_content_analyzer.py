@@ -5,6 +5,7 @@ Requires: OpenAI API key with gpt-4o-mini access
 """
 
 import time
+
 import dspy
 from dotenv import load_dotenv
 

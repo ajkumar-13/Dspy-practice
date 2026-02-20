@@ -4,8 +4,8 @@ Requires: pip install -U dspy python-dotenv numpy openai torch transformers
 Requires: OpenAI API key with gpt-4o-mini, gpt-4o-mini-audio-preview, gpt-4o-mini-tts
 """
 
-import numpy as np
 import dspy
+import numpy as np
 from dotenv import load_dotenv
 
 load_dotenv()

@@ -7,8 +7,8 @@ into a single robust ensemble using dspy.Ensemble with majority voting.
 """
 
 import dspy
-from dspy.evaluate import Evaluate
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
 
 load_dotenv()
 

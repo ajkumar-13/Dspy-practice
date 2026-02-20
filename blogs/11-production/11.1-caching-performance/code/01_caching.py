@@ -6,11 +6,12 @@ Requires: OpenAI API key
 
 import hashlib
 import json
-import time
 import threading
+import time
+
 import dspy
-from dspy.clients import Cache
 from dotenv import load_dotenv
+from dspy.clients import Cache
 
 load_dotenv()
 

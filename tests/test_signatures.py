@@ -7,7 +7,6 @@ types, and descriptions without calling any LLM.
 
 import dspy
 
-
 # ── Signature definitions (from blog 1.2) ────────────────────────────
 
 

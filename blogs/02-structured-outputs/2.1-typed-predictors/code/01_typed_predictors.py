@@ -3,10 +3,11 @@ Blog 2.1: Typed Predictors & Pydantic Integration
 Using Pydantic models for structured LM outputs.
 """
 
+from typing import Literal
+
 import dspy
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-from typing import Literal
 
 load_dotenv()
 

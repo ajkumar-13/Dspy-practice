@@ -5,8 +5,9 @@ Complete workflow for distilling an optimized API-based DSPy program
 to a local model running via Ollama.
 """
 
-import dspy
 import time
+
+import dspy
 from dspy.evaluate import Evaluate
 
 # ---------------------------------------------------------------------------
@@ -66,7 +67,8 @@ def optimize_teacher():
 
     qa_program = dspy.ChainOfThought(TechnicalQA)
 
-    metric = lambda ex, pred, trace=None: dspy.evaluate.SemanticF1()(ex, pred, trace)
+    def metric(ex, pred, trace=None):
+        return dspy.evaluate.SemanticF1()(ex, pred, trace)
 
     optimizer = dspy.MIPROv2(metric=metric, auto="light")
     optimized = optimizer.compile(qa_program, trainset=trainset)
@@ -89,7 +91,8 @@ def distill_to_local(optimized_teacher):
     )
     dspy.configure(lm=student_lm)
 
-    metric = lambda ex, pred, trace=None: dspy.evaluate.SemanticF1()(ex, pred, trace)
+    def metric(ex, pred, trace=None):
+        return dspy.evaluate.SemanticF1()(ex, pred, trace)
 
     distiller = dspy.BootstrapFinetune(metric=metric)
     distilled = distiller.compile(optimized_teacher, trainset=trainset)
@@ -109,7 +112,9 @@ def compare(optimized_teacher, distilled):
         "ollama_chat/llama3.2", api_base="http://localhost:11434"
     )
 
-    metric = lambda ex, pred, trace=None: dspy.evaluate.SemanticF1()(ex, pred, trace)
+    def metric(ex, pred, trace=None):
+        return dspy.evaluate.SemanticF1()(ex, pred, trace)
+
     evaluator = Evaluate(devset=devset, metric=metric, num_threads=4)
 
     # Teacher score

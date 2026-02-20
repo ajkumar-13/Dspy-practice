@@ -15,9 +15,10 @@ Prerequisites:
 """
 
 import json
+
 import dspy
-from pydantic import BaseModel, Field
 from dotenv import load_dotenv
+from pydantic import BaseModel, Field
 
 load_dotenv()
 
@@ -207,7 +208,7 @@ print(f"\nStrongest arguments: {len(rlm_result.strongest_arguments)}")
 for arg in rlm_result.strongest_arguments:
     print(f"  - [{arg.strength}] {arg.claim}")
 
-print(f"\nKey tensions:")
+print("\nKey tensions:")
 for tension in rlm_result.key_tensions:
     print(f"  - {tension}")
 

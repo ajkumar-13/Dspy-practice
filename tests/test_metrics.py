@@ -6,7 +6,6 @@ Validates pure-Python metric logic without calling any LLM.
 
 import dspy
 
-
 # ── Metric definition (from blog 3.2) ────────────────────────────────
 
 

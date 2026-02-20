@@ -5,12 +5,11 @@ Validates Pydantic field constraints, serialization, and rejection
 without calling any LLM.
 """
 
-import pytest
-from pydantic import BaseModel, Field, ValidationError
 from typing import Literal
 
 import dspy
-
+import pytest
+from pydantic import BaseModel, Field, ValidationError
 
 # ── Model definitions (from blog 2.1) ────────────────────────────────
 

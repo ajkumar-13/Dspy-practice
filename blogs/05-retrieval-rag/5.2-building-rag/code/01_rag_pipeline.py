@@ -108,5 +108,5 @@ print(f"Improvement: {optimized_score - baseline_score:.1f} absolute")
 # Inspect results
 print("\n=== Inspection ===")
 result = optimized_rag(question="What is the deepest point in the ocean?")
-print(f"Q: What is the deepest point in the ocean?")
+print("Q: What is the deepest point in the ocean?")
 print(f"A: {result.response}")
