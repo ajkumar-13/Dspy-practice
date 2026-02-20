@@ -12,7 +12,7 @@
 
 ## 📖 What Is This?
 
-A **42-part blog series** that teaches you DSPy, Stanford's framework for programming (not prompting) language models. Each blog is a self-contained lesson with explanations, runnable code examples, and hands-on projects.
+A **47-part blog series** that teaches you DSPy, Stanford's framework for programming (not prompting) language models. Each blog is a self-contained lesson with explanations, runnable code examples, and hands-on projects.
 
 **By the end, you'll be able to:**
 - Build LLM applications without writing a single prompt
@@ -75,6 +75,7 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 | 3.1 | [Building Eval Sets](blogs/03-evaluation/3.1-building-eval-sets/blog.md) | Create development sets with `dspy.Example` |
 | 3.2 | [Defining Metrics](blogs/03-evaluation/3.2-defining-metrics/blog.md) | Built-in, custom, and LLM-as-Judge metrics |
 | 3.3 | [Running Evaluations](blogs/03-evaluation/3.3-running-evaluations/blog.md) | Systematic benchmarking with `dspy.Evaluate` |
+| 3.4 | [Synthetic Datasets](blogs/03-evaluation/3.4-synthetic-datasets/blog.md) | Generate, filter, and curate training data with a teacher LM |
 | 3.P | [Project: Eval Harness](blogs/03-evaluation/3.P-mini-project-eval-harness/blog.md) | Reusable evaluation framework with model comparison |
 
 ### Phase 4 — Optimization: Self-Improving Pipelines
@@ -119,6 +120,7 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 | 7.1 | [BootstrapFinetune](blogs/07-finetuning/7.1-bootstrap-finetune/blog.md) | Auto-generated training data from traces |
 | 7.2 | [BetterTogether](blogs/07-finetuning/7.2-better-together/blog.md) | Joint prompt + weight optimization |
 | 7.3 | [Ensemble Methods](blogs/07-finetuning/7.3-ensemble/blog.md) | Combine multiple programs for robustness |
+| 7.4 | [Local Distillation](blogs/07-finetuning/7.4-local-distillation/blog.md) | API model to Ollama/Llama local distillation |
 | 7.P | [Project: Distillation](blogs/07-finetuning/7.P-project-distillation/blog.md) | GPT-4o → Llama 3 knowledge distillation |
 
 ### Phase 8 — RLM: Recursive Language Models 🔬
@@ -128,6 +130,7 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 |---|------|-------------|
 | 8.1 | [Understanding RLM](blogs/08-rlm/8.1-understanding-rlm/blog.md) | Recursive processing of massive contexts |
 | 8.2 | [Building with RLM](blogs/08-rlm/8.2-building-with-rlm/blog.md) | Practical RLM programs + retrieval combo |
+| 8.3 | [RLM Production Patterns](blogs/08-rlm/8.3-rlm-production-patterns/blog.md) | Chunking, error handling, monitoring, case study |
 | 8.P | [Project: Document Analyzer](blogs/08-rlm/8.P-project-document-analyzer/blog.md) | Analyze 500-page manuals with RLM |
 
 ### Phase 9 — RL Optimization
@@ -157,6 +160,8 @@ uv run blogs/01-foundations/1.1-setup-and-philosophy/code/01_basic_setup.py
 | 11.2 | [Async & Streaming](blogs/11-production/11.2-async-streaming/blog.md) | High-throughput async, real-time streaming |
 | 11.3 | [Deployment](blogs/11-production/11.3-deployment/blog.md) | Save, load, and deploy as APIs |
 | 11.4 | [Debugging & Observability](blogs/11-production/11.4-debugging-observability/blog.md) | Prompt inspection, tracing, MLflow |
+| 11.5 | [Tracing & Observability](blogs/11-production/11.5-tracing-observability/blog.md) | Langfuse, Phoenix, OpenTelemetry integration |
+| 11.6 | [Continuous Evaluation](blogs/11-production/11.6-continuous-evaluation/blog.md) | Eval-gated CI/CD, quality regression testing |
 | 11.P | [Project: Production API](blogs/11-production/11.P-project-production-api/blog.md) | FastAPI + caching + streaming + observability |
 
 ### Phase 12 — Advanced Architectures & Research
@@ -211,6 +216,7 @@ learn-dspy/
     │   ├── 3.1-building-eval-sets/
     │   ├── 3.2-defining-metrics/
     │   ├── 3.3-running-evaluations/
+    │   ├── 3.4-synthetic-datasets/
     │   └── 3.P-mini-project-eval-harness/
     │
     ├── 04-optimization/
@@ -239,11 +245,13 @@ learn-dspy/
     │   ├── 7.1-bootstrap-finetune/
     │   ├── 7.2-better-together/
     │   ├── 7.3-ensemble/
+    │   ├── 7.4-local-distillation/
     │   └── 7.P-project-distillation/
     │
     ├── 08-rlm/
     │   ├── 8.1-understanding-rlm/
     │   ├── 8.2-building-with-rlm/
+    │   ├── 8.3-rlm-production-patterns/
     │   └── 8.P-project-document-analyzer/
     │
     ├── 09-rl-optimization/
@@ -261,6 +269,8 @@ learn-dspy/
     │   ├── 11.2-async-streaming/
     │   ├── 11.3-deployment/
     │   ├── 11.4-debugging-observability/
+    │   ├── 11.5-tracing-observability/
+    │   ├── 11.6-continuous-evaluation/
     │   └── 11.P-project-production-api/
     │
     └── 12-advanced/
