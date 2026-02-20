@@ -42,9 +42,9 @@ class LegalDocExtractor(dspy.Module):
     def forward(self, document: str):
         result = self.extract(document=document)
 
-        # Validate at least one entity was extracted
-        assert len(result.extracted_info.entities) > 0, (
-            "Must extract at least one entity from the document."
+        dspy.Assert(  # type: ignore[attr-defined]
+            len(result.extracted_info.entities) > 0,
+            "Must extract at least one entity from the document.",
         )
 
         return result
