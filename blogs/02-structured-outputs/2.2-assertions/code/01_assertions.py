@@ -1,7 +1,11 @@
 """
 Blog 2.2: DSPy Assertions
-Using Assert and Suggest for programmatic constraints.
+Using runtime validation for programmatic constraints.
+Note: dspy.Assert/dspy.Suggest were removed in DSPy 3.x.
+Use standard Python validation instead.
 """
+
+import logging
 
 import dspy
 from dotenv import load_dotenv
@@ -9,6 +13,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 dspy.configure(lm=dspy.LM("openai/gpt-4o-mini"))
+
+logger = logging.getLogger(__name__)
 
 
 class FactualQA(dspy.Module):
@@ -19,16 +25,13 @@ class FactualQA(dspy.Module):
         result = self.generate(question=question)
 
         # Hard constraint: answer must not be empty
-        dspy.Assert(
-            len(result.answer) > 10,
-            "Answer must be at least 10 characters long and substantive.",
+        assert len(result.answer) > 10, (
+            "Answer must be at least 10 characters long and substantive."
         )
 
         # Soft constraint: suggest a source be provided
-        dspy.Suggest(
-            len(result.source) > 0,
-            "Please provide a source or reference for your answer.",
-        )
+        if not result.source or len(result.source) == 0:
+            logger.warning("Please provide a source or reference for your answer.")
 
         return result
 

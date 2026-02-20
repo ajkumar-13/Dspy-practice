@@ -120,9 +120,8 @@ def demo_assertion_debugging():
 
         def forward(self, question, **kwargs):
             result = self.predict(question=question)
-            dspy.Assert(
-                len(result.answer) > 50,
-                "Answer must be at least 50 characters",
+            assert len(result.answer) > 50, (
+                "Answer must be at least 50 characters"
             )
             return result
 
@@ -130,7 +129,7 @@ def demo_assertion_debugging():
         qa = ValidatedQA()
         result = qa(question="Say hi")
         print(f"Answer: {result.answer}")
-    except dspy.DSPyAssertionError as e:
+    except AssertionError as e:
         print(f"Assertion failed: {e}")
         dspy.inspect_history(n=1)
 

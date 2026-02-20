@@ -8,7 +8,7 @@ import time
 from datetime import datetime
 
 import dspy
-from datasets import load_dataset
+from datasets import load_dataset  # type: ignore[import-not-found]
 from dotenv import load_dotenv
 from dspy.evaluate import SemanticF1, answer_exact_match, answer_passage_match
 
@@ -116,7 +116,7 @@ def run_evaluation_grid(programs, metrics, devset, num_threads=16):
             print(f"\nEvaluating {prog_name} with {metric_name}...")
             start_time = time.time()
 
-            score = evaluator(program, metric=metric_fn)
+            score = evaluator(program, metric=metric_fn).score
 
             elapsed = time.time() - start_time
             results[prog_name][metric_name] = {
