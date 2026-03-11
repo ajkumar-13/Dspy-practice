@@ -145,7 +145,7 @@ evaluate = dspy.Evaluate(devset=devset, metric=metric, num_threads=4, display_pr
 
 rag = RAG()
 baseline_score = evaluate(rag)
-print(f"Baseline SemanticF1: {baseline_score:.1f}%")
+print(f"Baseline SemanticF1: {float(baseline_score):.1f}%")
 ```
 
 `SemanticF1` uses token-level overlap to compute precision, recall, and F1 between the prediction and the gold answer. It's more forgiving than exact match but still rewards precise, factual responses.
@@ -168,8 +168,8 @@ optimized_rag = optimizer.compile(rag, trainset=trainset)
 
 # Evaluate the optimized pipeline
 optimized_score = evaluate(optimized_rag)
-print(f"Optimized SemanticF1: {optimized_score:.1f}%")
-print(f"Improvement: {optimized_score - baseline_score:.1f}% absolute")
+print(f"Optimized SemanticF1: {float(optimized_score):.1f}%")
+print(f"Improvement: {float(optimized_score) - float(baseline_score):.1f}% absolute")
 ```
 
 In the official DSPy RAG tutorial, this pattern produced improvements from **42% to 61%** SemanticF1: a meaningful jump with zero manual prompt engineering. The optimizer discovers:
