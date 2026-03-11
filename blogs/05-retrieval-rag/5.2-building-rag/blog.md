@@ -99,6 +99,7 @@ This is the heart of RAG in DSPy. Notice what's *not* here: no system prompts, n
 Before optimizing, you need to know how your baseline performs. DSPy provides `SemanticF1`: a metric that measures the semantic overlap between the predicted response and the gold answer. Unlike exact match, it handles paraphrasing and partial correctness.
 
 ```python
+from dspy.evaluate import SemanticF1
 # Build evaluation data
 trainset = [
     dspy.Example(
